@@ -134,6 +134,7 @@ export function IconBrowser({ onSelect, currentSymbol }: IconBrowserProps) {
             <button
               onClick={() => setSearch('')}
               className="absolute right-2 top-1/2 -translate-y-1/2 rounded p-1 text-gray-500 hover:bg-gray-700 hover:text-white"
+              aria-label="Clear search"
             >
               <X size={14} />
             </button>

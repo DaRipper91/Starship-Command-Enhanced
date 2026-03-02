@@ -110,6 +110,7 @@ export function ColorPicker({
             <button
               onClick={() => setIsOpen(false)}
               className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-white"
+              aria-label="Confirm color"
             >
               <Check size={14} />
             </button>
@@ -117,6 +118,8 @@ export function ColorPicker({
             <button
               onClick={() => setIsOpen(true)}
               className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300"
+              aria-label="Pick color"
+              aria-expanded={isOpen}
             >
               <Pipette size={14} />
             </button>
@@ -148,6 +151,7 @@ export function ColorPicker({
                 style={{ backgroundColor: c }}
                 onClick={() => handleColorChange(c)}
                 title={c}
+                aria-label={`Select color ${c}`}
               />
             ))}
           </div>

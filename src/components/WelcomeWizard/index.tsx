@@ -118,6 +118,7 @@ export function WelcomeWizard() {
           <button
             onClick={handleComplete}
             className="absolute right-4 top-4 text-gray-500 hover:text-white"
+            aria-label="Close Wizard"
           >
             <X size={20} />
           </button>

@@ -37,6 +37,7 @@ export function ToastContainer({ toasts, onRemove }: ToastContainerProps) {
           <button
             onClick={() => onRemove(toast.id)}
             className="rounded p-1 opacity-70 hover:bg-black/20 hover:opacity-100"
+            aria-label="Close notification"
           >
             <X size={14} />
           </button>

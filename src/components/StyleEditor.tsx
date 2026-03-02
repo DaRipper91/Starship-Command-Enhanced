@@ -165,6 +165,8 @@ export function StyleEditor({ value, onChange, className }: StyleEditorProps) {
                 : 'bg-gray-700 text-gray-400 hover:bg-gray-600 hover:text-gray-200',
             )}
             title="Bold"
+            aria-label="Toggle Bold"
+            aria-pressed={isBold}
           >
             <Bold size={16} />
           </button>
@@ -177,6 +179,8 @@ export function StyleEditor({ value, onChange, className }: StyleEditorProps) {
                 : 'bg-gray-700 text-gray-400 hover:bg-gray-600 hover:text-gray-200',
             )}
             title="Italic"
+            aria-label="Toggle Italic"
+            aria-pressed={isItalic}
           >
             <Italic size={16} />
           </button>
@@ -189,6 +193,8 @@ export function StyleEditor({ value, onChange, className }: StyleEditorProps) {
                 : 'bg-gray-700 text-gray-400 hover:bg-gray-600 hover:text-gray-200',
             )}
             title="Underline"
+            aria-label="Toggle Underline"
+            aria-pressed={isUnderline}
           >
             <Underline size={16} />
           </button>
@@ -201,6 +207,7 @@ export function StyleEditor({ value, onChange, className }: StyleEditorProps) {
                 ? 'border-blue-500 bg-blue-600 text-white'
                 : 'bg-transparent text-gray-400 hover:bg-gray-700 hover:text-gray-200',
             )}
+            aria-pressed={isDimmed}
           >
             Dim
           </button>
@@ -213,6 +220,7 @@ export function StyleEditor({ value, onChange, className }: StyleEditorProps) {
                 ? 'border-blue-500 bg-blue-600 text-white'
                 : 'bg-transparent text-gray-400 hover:bg-gray-700 hover:text-gray-200',
             )}
+            aria-pressed={isInverted}
           >
             Inverted
           </button>

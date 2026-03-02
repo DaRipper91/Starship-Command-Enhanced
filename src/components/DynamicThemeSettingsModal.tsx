@@ -37,6 +37,7 @@ export function DynamicThemeSettingsModal({
           <button
             onClick={onClose}
             className="rounded p-1 text-gray-400 hover:bg-gray-700 hover:text-white"
+            aria-label="Close"
           >
             <X size={20} />
           </button>
@@ -57,6 +58,9 @@ export function DynamicThemeSettingsModal({
               className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
                 dynamicSettings.enabled ? 'bg-blue-600' : 'bg-gray-600'
               }`}
+              aria-label="Toggle dynamic theme"
+              aria-checked={dynamicSettings.enabled}
+              role="switch"
             >
               <span
                 className={`inline-block h-4 w-4 transform rounded-full bg-white transition-transform ${

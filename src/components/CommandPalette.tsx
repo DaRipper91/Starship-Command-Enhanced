@@ -51,6 +51,7 @@ export function CommandPalette({
           <button
             onClick={onClose}
             className="rounded bg-gray-800 p-1 text-gray-400 hover:bg-gray-700 hover:text-white"
+            aria-label="Close command palette"
           >
             <X size={16} />
           </button>

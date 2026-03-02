@@ -85,6 +85,7 @@ export function ComparisonView({ onClose }: ComparisonViewProps) {
             <button
               onClick={onClose}
               className="rounded p-1 text-gray-400 hover:bg-gray-700 hover:text-white"
+              aria-label="Close"
             >
               <X size={20} />
             </button>
@@ -120,6 +121,7 @@ export function ComparisonView({ onClose }: ComparisonViewProps) {
             <button
               onClick={handleSwap}
               className="rounded-full bg-gray-800 p-3 text-gray-400 transition-transform hover:bg-gray-700 hover:text-white active:scale-95"
+              aria-label="Swap themes"
             >
               <ArrowLeftRight size={20} />
             </button>
