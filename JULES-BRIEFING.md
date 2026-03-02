@@ -969,13 +969,11 @@ if __name__ == "__main__":
    - `_meta/.gitkeep`
    - `repos/.gitkeep`
 4. Create a root `README.md` with this content:
-
    ```markdown
    # 🗂️ DaRipper91 — Repo Map
 
    > Initial setup. First sync will populate this file automatically.
    ```
-
 5. Commit everything with message: `🚀 initial setup: repo-map sync infrastructure`
 
 ### Task 2 — Add changelog system to each repo

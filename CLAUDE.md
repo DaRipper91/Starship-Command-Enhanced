@@ -25,7 +25,6 @@ npm test          # Run Vitest test suite
 ```
 
 Run a single test file:
-
 ```sh
 npx vitest run src/lib/format-parser.test.ts
 ```
@@ -42,14 +41,14 @@ All theme state lives in a single **Zustand** store with `persist` middleware (l
 
 ### Key Libraries
 
-| Purpose                         | Library                                                               |
-| ------------------------------- | --------------------------------------------------------------------- |
-| Drag-and-drop module reordering | `@dnd-kit`                                                            |
-| Terminal emulation              | `xterm.js`                                                            |
-| Color manipulation              | `colord`                                                              |
-| Image palette extraction        | `node-vibrant` (in a Web Worker)                                      |
-| TOML parsing/stringification    | `@iarna/toml` (wrapped in `src/lib/toml-parser.ts`)                   |
-| Styling                         | Tailwind CSS + `cn()` from `src/lib/utils.ts` (clsx + tailwind-merge) |
+| Purpose | Library |
+|---|---|
+| Drag-and-drop module reordering | `@dnd-kit` |
+| Terminal emulation | `xterm.js` |
+| Color manipulation | `colord` |
+| Image palette extraction | `node-vibrant` (in a Web Worker) |
+| TOML parsing/stringification | `@iarna/toml` (wrapped in `src/lib/toml-parser.ts`) |
+| Styling | Tailwind CSS + `cn()` from `src/lib/utils.ts` (clsx + tailwind-merge) |
 
 ### Core Source Files
 

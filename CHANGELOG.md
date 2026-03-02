@@ -3,18 +3,17 @@
 ## [1.3.0] - 2026-02-24
 
 ### Added
-
 - **Theme Import/Export Engine**: Full theme import/export system with validation, serialization, and error handling.
 - **Undo/Redo Stack**: Full undo/redo system with configurable limit of 50 steps using immutable history for all editor state.
 - **Theme Preset System**: Curated set of 8 built-in theme presets with single-click application and unsaved changes prompt.
 
 ### Improved
-
 - **Type Safety**: Audited all TypeScript files, removed all implicit and explicit uses of `any`, and fortified types across configuration parsing.
 - **State Management**: Refactored logic to centralize editor/theme state through Zustand `theme-store.ts`.
 - **Vite Build Optimization**: Implemented manual chunk splitting to isolate large vendor dependencies (`xterm`, `colord`, `@dnd-kit`) ensuring smaller chunk sizes under 400kb.
 - **Runtime Resilience**: Wrapped major features with React Error Boundaries to prevent unexpected crashes.
 - **Linting & Code Consistency**: Enforced strict rules in `.eslintrc.cjs` (no unused vars, no `any`, no production logs) and added `lint-staged` pre-commit hooks.
+
 
 ## [1.2.0] - 2026-02-23
 
