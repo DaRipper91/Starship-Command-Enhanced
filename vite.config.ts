@@ -16,6 +16,7 @@ export default defineConfig({
   },
   build: {
     rollupOptions: {
+      treeshake: true,
       output: {
         manualChunks: {
           'vendor-core': [

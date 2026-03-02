@@ -33,6 +33,8 @@ export function ExportImport({
   const [importText, setImportText] = useState('');
   const [importUrl, setImportUrl] = useState('');
   const [validationError, setValidationError] = useState<string | null>(null);
+  const [importWarnings, setImportWarnings] = useState<string[]>([]);
+  const [pendingImport, setPendingImport] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   // --- EXPORT LOGIC ---
@@ -79,9 +81,24 @@ export function ExportImport({
 
   // --- IMPORT LOGIC ---
 
+  const executeImport = (tomlString: string) => {
+    try {
+      importToml(tomlString);
+      addToast('Theme imported successfully!', 'success');
+      onClose();
+    } catch (err) {
+      setValidationError(
+        `Failed to import: ${err instanceof Error ? err.message : String(err)}`,
+      );
+    }
+  };
+
   const validateAndImport = (tomlString: string) => {
     try {
       setValidationError(null);
+      setImportWarnings([]);
+      setPendingImport(null);
+
       // Try to parse to see if it's valid
       const parsedConfig = TomlParser.parse(tomlString);
       const { valid, errors, warnings } = TomlParser.validate(parsedConfig);
@@ -94,30 +111,16 @@ export function ExportImport({
       }
 
       if (warnings.length > 0) {
-        // Don't return, let user decide if they want to proceed despite warnings
-        // But we need to show warnings first.
-        // For now, simpler UX: Show warnings in the confirm dialog or as a separate step?
-        // Let's append warnings to the confirmation message.
-        const warningMsg = `\n\nWarnings:\n${warnings
-          .slice(0, 5)
-          .map((w) => `- ${w}`)
-          .join('\n')}${warnings.length > 5 ? '\n...and more' : ''}`;
-        if (
-          !confirm(
-            `This will overwrite your current theme.${warningMsg}\n\nAre you sure?`,
-          )
-        ) {
-          return false;
-        }
-      } else {
-        if (!confirm('This will overwrite your current theme. Are you sure?')) {
-          return false;
-        }
+        setImportWarnings(warnings);
+        setPendingImport(tomlString);
+        return false; // Wait for user confirmation
       }
 
-      importToml(tomlString);
-      addToast('Theme imported successfully!', 'success');
-      onClose();
+      if (!confirm('This will overwrite your current theme. Are you sure?')) {
+        return false;
+      }
+
+      executeImport(tomlString);
       return true;
     } catch (err) {
       setValidationError(
@@ -308,6 +311,44 @@ export function ExportImport({
                 <div className="flex items-start gap-2 rounded-md border border-red-800 bg-red-900/20 p-3 text-sm text-red-200">
                   <AlertCircle size={16} className="mt-0.5 shrink-0" />
                   <p>{validationError}</p>
+                </div>
+              )}
+
+              {importWarnings.length > 0 && pendingImport && (
+                <div className="flex flex-col gap-3 rounded-md border border-yellow-800 bg-yellow-900/20 p-4 text-sm text-yellow-200">
+                  <div className="flex items-start gap-2 font-semibold">
+                    <AlertCircle size={18} className="shrink-0" />
+                    <p>Import Warnings</p>
+                  </div>
+                  <ul className="ml-6 list-disc space-y-1 opacity-90">
+                    {importWarnings.slice(0, 5).map((w, i) => (
+                      <li key={i}>{w}</li>
+                    ))}
+                    {importWarnings.length > 5 && (
+                      <li>...and {importWarnings.length - 5} more warnings</li>
+                    )}
+                  </ul>
+                  <p className="mt-2 text-yellow-100 opacity-90">
+                    This will overwrite your current theme. Do you still want to
+                    proceed?
+                  </p>
+                  <div className="mt-3 flex gap-3">
+                    <button
+                      onClick={() => executeImport(pendingImport)}
+                      className="rounded bg-yellow-600 px-4 py-2 font-medium text-white hover:bg-yellow-500"
+                    >
+                      Import Anyway
+                    </button>
+                    <button
+                      onClick={() => {
+                        setImportWarnings([]);
+                        setPendingImport(null);
+                      }}
+                      className="rounded border border-yellow-700 bg-transparent px-4 py-2 font-medium text-yellow-200 hover:bg-yellow-900/40"
+                    >
+                      Cancel
+                    </button>
+                  </div>
                 </div>
               )}
 

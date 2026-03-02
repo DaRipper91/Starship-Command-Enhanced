@@ -17,6 +17,7 @@ import { ToastProvider, useToast } from './contexts/ToastContext';
 import { useDynamicTheme } from './hooks/useDynamicTheme';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { useThemeStore } from './stores/theme-store';
+import { useUIStore } from './stores/ui-store';
 
 function AppContent() {
   const {
@@ -30,13 +31,19 @@ function AppContent() {
     canUndo,
     canRedo,
   } = useThemeStore();
+
+  const {
+    showExportImport,
+    setShowExportImport,
+    showGallery,
+    setShowGallery,
+    showComparison,
+    setShowComparison,
+    showCommandPalette,
+    setShowCommandPalette,
+  } = useUIStore();
+
   const { addToast } = useToast();
-  const [showExportImport, setShowExportImport] = useState<
-    'export' | 'import' | null
-  >(null);
-  const [showGallery, setShowGallery] = useState(false);
-  const [showComparison, setShowComparison] = useState(false);
-  const [showCommandPalette, setShowCommandPalette] = useState(false);
   const [themeName, setThemeName] = useState(
     currentTheme.metadata.name || 'My Awesome Theme',
   );

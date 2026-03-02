@@ -29,11 +29,11 @@ export function ImagePalette() {
       URL.revokeObjectURL(imagePreview);
     }
 
-    const objectUrl = URL.createObjectURL(file);
-    setImagePreview(objectUrl);
-
-    setIsExtracting(true);
     try {
+      const objectUrl = URL.createObjectURL(file);
+      setImagePreview(objectUrl);
+
+      setIsExtracting(true);
       const extracted = await ColorUtils.extractPaletteFromImage(file);
       setPalette(extracted);
       addToast('Palette extracted!', 'success');
