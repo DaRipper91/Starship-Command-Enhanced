@@ -33,9 +33,11 @@ describe('ColorUtils Optimization', () => {
     vi.clearAllMocks();
 
     // Mock createImageBitmap
-    global.createImageBitmap = vi.fn().mockResolvedValue({
-      close: vi.fn(),
-    } as unknown as ImageBitmap);
+    (globalThis as Record<string, unknown>).createImageBitmap = vi
+      .fn()
+      .mockResolvedValue({
+        close: vi.fn(),
+      } as unknown as ImageBitmap);
   });
 
   it('should use Web Worker to extract palette', async () => {
@@ -45,6 +47,6 @@ describe('ColorUtils Optimization', () => {
 
     expect(palette).toBeDefined();
     expect(palette.primary).toBe('#ff0000');
-    expect(global.createImageBitmap).toHaveBeenCalledWith(file);
+    expect(globalThis.createImageBitmap).toHaveBeenCalledWith(file);
   });
 });
