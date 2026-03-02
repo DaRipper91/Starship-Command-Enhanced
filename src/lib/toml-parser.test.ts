@@ -137,7 +137,7 @@ describe('TomlParser', () => {
 
       expect(result?.['polluted']).toBeUndefined();
       expect(
-        (Object.prototype as { polluted?: string }).polluted,
+        (Object.prototype as unknown as Record<string, unknown>).polluted,
       ).toBeUndefined();
     });
 
@@ -151,7 +151,7 @@ describe('TomlParser', () => {
 
       expect(result?.['polluted']).toBeUndefined();
       expect(
-        (Object.prototype as { polluted?: string }).polluted,
+        (Object.prototype as unknown as Record<string, unknown>).polluted,
       ).toBeUndefined();
     });
 
@@ -163,7 +163,7 @@ describe('TomlParser', () => {
 
       expect(result?.['polluted']).toBeUndefined();
       expect(
-        (Object.prototype as { polluted?: string }).polluted,
+        (Object.prototype as unknown as Record<string, unknown>).polluted,
       ).toBeUndefined();
     });
   });

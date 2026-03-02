@@ -16,8 +16,9 @@ We enforce strict code quality rules using ESLint and Prettier.
 
 - **No `any`**: TypeScript strict mode is enabled. Avoid `any` at all costs.
 - **Imports**: Imports are automatically sorted. Run `npm run lint -- --fix` to sort them.
-- **No Console Logs**: Production code should not contain `console.log`. Use `console.warn` or `console.error` sparingly.
-- **Unused Variables**: Unused variables are not allowed. Prefix with `_` if they are intentional.
+- **No Console Logs**: Production code must not contain `console.log`. It will throw an error in production environments. Use `console.warn` or `console.error` sparingly.
+- **Unused Variables**: Unused variables are strictly forbidden. Prefix with `_` if they are intentionally unused.
+- **React Hooks**: Follow the rules of React Hooks rigorously.
 
 Before committing, please run:
 

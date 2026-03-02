@@ -9,8 +9,8 @@ import {
 import React, { useEffect, useState } from 'react';
 
 import { CommandPalette } from './components/CommandPalette';
-import { DynamicThemeSettingsModal } from './components/DynamicThemeSettingsModal';
 import { ComparisonView } from './components/ComparisonView';
+import { DynamicThemeSettingsModal } from './components/DynamicThemeSettingsModal';
 import { ErrorBoundary } from './components/ErrorBoundary';
 import { ExportImport } from './components/ExportImport';
 import { ImagePalette } from './components/ImagePalette';
@@ -25,6 +25,7 @@ import { ToastProvider, useToast } from './contexts/ToastContext';
 import { useDynamicTheme } from './hooks/useDynamicTheme';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
 import { useThemeStore } from './stores/theme-store';
+import { useUIStore } from './stores/ui-store';
 
 function AppContent() {
   const {
@@ -38,13 +39,19 @@ function AppContent() {
     canUndo,
     canRedo,
   } = useThemeStore();
+
+  const {
+    showExportImport,
+    setShowExportImport,
+    showGallery,
+    setShowGallery,
+    showComparison,
+    setShowComparison,
+    showCommandPalette,
+    setShowCommandPalette,
+  } = useUIStore();
+
   const { addToast } = useToast();
-  const [showExportImport, setShowExportImport] = useState<
-    'export' | 'import' | null
-  >(null);
-  const [showGallery, setShowGallery] = useState(false);
-  const [showComparison, setShowComparison] = useState(false);
-  const [showCommandPalette, setShowCommandPalette] = useState(false);
   const [showDynamicThemeSettings, setShowDynamicThemeSettings] =
     useState(false);
   const [themeName, setThemeName] = useState(
