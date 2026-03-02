@@ -17,7 +17,10 @@ module.exports = {
     ],
     'prettier/prettier': 'error',
     // Strict rules
-    'no-console': process.env.NODE_ENV === 'production' ? ['error', { allow: ['warn', 'error'] }] : ['warn', { allow: ['warn', 'error'] }],
+    'no-console':
+      process.env.NODE_ENV === 'production'
+        ? ['error', { allow: ['warn', 'error'] }]
+        : ['warn', { allow: ['warn', 'error'] }],
     '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
     'simple-import-sort/imports': 'error',
     'simple-import-sort/exports': 'error',

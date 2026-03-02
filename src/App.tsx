@@ -49,11 +49,11 @@ function AppContent() {
     setShowComparison,
     showCommandPalette,
     setShowCommandPalette,
+    showDynamicThemeSettings,
+    setShowDynamicThemeSettings,
   } = useUIStore();
 
   const { addToast } = useToast();
-  const [showDynamicThemeSettings, setShowDynamicThemeSettings] =
-    useState(false);
   const [themeName, setThemeName] = useState(
     currentTheme.metadata.name || 'My Awesome Theme',
   );

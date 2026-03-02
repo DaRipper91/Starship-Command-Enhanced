@@ -68,7 +68,7 @@
 
 **Feature Name**: Module Dependency Visualizer
 **Category**: Power User / Diagnostics
-**Description**: A view that shows which conditions trigger each module (e.g., Node.js module is triggered by `package.json`, `node_modules`). It helps users understand *when* a module will appear in their prompt.
+**Description**: A view that shows which conditions trigger each module (e.g., Node.js module is triggered by `package.json`, `node_modules`). It helps users understand _when_ a module will appear in their prompt.
 **User Value**: Reduces confusion. Users often add a module and wonder why it isn't showing up. This tool clarifies the underlying logic without requiring them to read the documentation.
 **Implementation Complexity**: Medium (requires parsing the documentation or schema to hardcode dependency logic).
 **Similar Example**: Build tool dependency graphs or Notion formula explainers.
@@ -81,7 +81,6 @@
 **Implementation Complexity**: Medium (managing two synchronized state trees and handling the export logic).
 **Similar Example**: MacOS auto dark mode, or terminal emulators that support dynamic profile switching.
 **Priority**: Low
-
 
 ## Part B: UI/UX Design Suggestions
 

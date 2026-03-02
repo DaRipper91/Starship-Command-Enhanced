@@ -18,6 +18,12 @@ interface UIStore {
 
   showCommandPalette: boolean;
   setShowCommandPalette: (state: boolean) => void;
+
+  showDynamicThemeSettings: boolean;
+  setShowDynamicThemeSettings: (state: boolean) => void;
+
+  showWelcomeWizard: boolean;
+  setShowWelcomeWizard: (state: boolean) => void;
 }
 
 export const useUIStore = create<UIStore>()(
@@ -37,6 +43,13 @@ export const useUIStore = create<UIStore>()(
 
       showCommandPalette: false,
       setShowCommandPalette: (state) => set({ showCommandPalette: state }),
+
+      showDynamicThemeSettings: false,
+      setShowDynamicThemeSettings: (state) =>
+        set({ showDynamicThemeSettings: state }),
+
+      showWelcomeWizard: false,
+      setShowWelcomeWizard: (state) => set({ showWelcomeWizard: state }),
     }),
     {
       name: 'starship-ui-storage',

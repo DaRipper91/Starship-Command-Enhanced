@@ -38,7 +38,7 @@ export function ImagePalette() {
       setPalette(extracted);
       addToast('Palette extracted!', 'success');
     } catch (error) {
-      console.error(error);
+      console.error('Extraction error:', error);
       addToast('Failed to extract colors from image.', 'error');
     } finally {
       setIsExtracting(false);

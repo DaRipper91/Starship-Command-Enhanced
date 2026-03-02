@@ -274,10 +274,6 @@ function getColorCode(color: string, isBackground: boolean): number | null {
       // Or even better, try to find the closest ANSI color.
       // For now, let's just return null for hex to avoid breaking the escape sequence structure
       // if we don't support it fully.
-      // But wait, many themes use hex.
-      // Let's support it properly.
-      // But `getColorCode` returns `number | null`.
-      // I need to change `styleToAnsi` to handle more complex codes if I want hex support.
       return null;
     }
   }

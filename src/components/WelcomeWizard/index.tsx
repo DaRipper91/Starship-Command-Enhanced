@@ -10,10 +10,11 @@ import { useEffect, useState } from 'react';
 import { PRESET_THEMES } from '../../lib/presets';
 import { cn } from '../../lib/utils';
 import { useThemeStore } from '../../stores/theme-store';
+import { useUIStore } from '../../stores/ui-store';
 import { Theme } from '../../types/starship.types';
 
 export function WelcomeWizard() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { showWelcomeWizard, setShowWelcomeWizard } = useUIStore();
   const [step, setStep] = useState(1);
   const { loadTheme } = useThemeStore();
 
@@ -21,13 +22,13 @@ export function WelcomeWizard() {
     // Check if it's the user's first time
     const hasSeenWizard = localStorage.getItem('starship_wizard_completed');
     if (!hasSeenWizard) {
-      setIsOpen(true);
+      setShowWelcomeWizard(true);
     }
-  }, []);
+  }, [setShowWelcomeWizard]);
 
   const handleComplete = () => {
     localStorage.setItem('starship_wizard_completed', 'true');
-    setIsOpen(false);
+    setShowWelcomeWizard(false);
   };
 
   const handleSelectPreset = (theme: Theme) => {
@@ -35,7 +36,7 @@ export function WelcomeWizard() {
     setStep(3); // skip to next
   };
 
-  if (!isOpen) return null;
+  if (!showWelcomeWizard) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm">
