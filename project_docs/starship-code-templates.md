@@ -613,11 +613,12 @@ export const useThemeStore = create<ThemeStore>()(
 ## 5. Terminal Preview Component (src/components/TerminalPreview/index.tsx)
 
 ```typescript
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 import 'xterm/css/xterm.css';
 import { useThemeStore } from '../../stores/theme-store';
+import { parseFormattedString, styleToAnsi } from '../../lib/format-parser';
 
 export const TerminalPreview: React.FC = () => {
   const terminalRef = useRef<HTMLDivElement>(null);
@@ -658,26 +659,31 @@ export const TerminalPreview: React.FC = () => {
     };
   }, []);
 
+  const segments = useMemo(() => {
+    const format = currentTheme.config.format || '';
+    return parseFormattedString(format, currentTheme.config);
+  }, [currentTheme.config]);
+
   useEffect(() => {
     // Re-render when theme changes
-    if (xtermRef.current) {
-      xtermRef.current.clear();
-      renderPrompt(xtermRef.current);
-    }
-  }, [currentTheme]);
+    const term = xtermRef.current;
+    if (!term) return;
+
+    term.clear();
+    renderPrompt(term);
+  }, [segments, currentTheme]);
 
   const renderPrompt = (terminal: Terminal) => {
     const { config } = currentTheme;
-
-    // Simple prompt rendering - this should be enhanced
-    // to properly parse and render the format string
     terminal.writeln('');
-    terminal.write('┌─[user@hostname] - [~/projects/my-app]');
-    terminal.writeln('');
-    terminal.write('└─$ ');
 
-    // TODO: Implement proper format string parser
-    // that renders the actual prompt based on config
+    // Dynamic prompt rendering using the format string parser
+    segments.forEach((segment) => {
+      const ansi = styleToAnsi(segment.style);
+      terminal.write(ansi + segment.text + (ansi ? '\x1b[0m' : ''));
+    });
+
+    terminal.writeln('');
   };
 
   return (
