@@ -4,6 +4,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
 
+import { useDebounce } from '../hooks/useDebounce';
 import { ColorUtils } from '../lib/color-utils';
 import { parseFormattedString } from '../lib/format-parser';
 import { MOCK_SCENARIOS } from '../lib/mock-data';
@@ -122,12 +123,14 @@ export const TerminalPreview: React.FC<TerminalPreviewProps> = ({
     }
   }, [fontFamily]);
 
+  const debouncedConfig = useDebounce(currentTheme.config, 200);
+
   const segments = useMemo(() => {
-    const format = currentTheme.config.format || '';
+    const format = debouncedConfig.format || '';
     const currentScenarioKey = scenarioKeys[scenarioIndex];
     const scenario = MOCK_SCENARIOS[currentScenarioKey];
-    return parseFormattedString(format, currentTheme.config, scenario);
-  }, [currentTheme.config, scenarioIndex, scenarioKeys]);
+    return parseFormattedString(format, debouncedConfig, scenario);
+  }, [debouncedConfig, scenarioIndex, scenarioKeys]);
 
   // Effect to update theme and content
   useEffect(() => {
@@ -135,20 +138,20 @@ export const TerminalPreview: React.FC<TerminalPreviewProps> = ({
     if (!term) return;
 
     // Apply the theme
-    const xtermTheme = translateThemeToXterm(currentTheme.config);
+    const xtermTheme = translateThemeToXterm(debouncedConfig);
     term.options.theme = xtermTheme;
 
     // Write content
     term.reset();
     segments.forEach((segment) => {
-      const ansi = styleToAnsi(segment.style, currentTheme.config);
+      const ansi = styleToAnsi(segment.style, debouncedConfig);
       term.write(ansi + segment.text + (ansi ? '\x1b[0m' : ''));
     });
-  }, [segments, currentTheme.config]);
+  }, [segments, debouncedConfig]);
 
   const terminalBg = useMemo(() => {
-    return translateThemeToXterm(currentTheme.config).background || '#1e1e1e';
-  }, [currentTheme.config]);
+    return translateThemeToXterm(debouncedConfig).background || '#1e1e1e';
+  }, [debouncedConfig]);
 
   return (
     <div

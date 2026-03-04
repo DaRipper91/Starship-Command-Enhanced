@@ -48,11 +48,11 @@ function transformSchema(schema) {
   for (const key in topLevelProps) {
     const prop = topLevelProps[key];
     if (!prop.$ref) {
-        topLevelNonModuleProps[key] = {
-            description: prop.description || '',
-            type: prop.type,
-            default: prop.default,
-        };
+      topLevelNonModuleProps[key] = {
+        description: prop.description || '',
+        type: prop.type,
+        default: prop.default,
+      };
     }
   }
 
@@ -61,19 +61,17 @@ function transformSchema(schema) {
     title: 'Top-Level Config',
     description: 'Global configuration settings for Starship.',
     properties: Object.entries(topLevelNonModuleProps).map(
-        ([propKey, propValue]) => ({
-            name: propKey,
-            description: propValue.description || '',
-            type: propValue.type,
-            default: propValue.default,
-        }),
+      ([propKey, propValue]) => ({
+        name: propKey,
+        description: propValue.description || '',
+        type: propValue.type,
+        default: propValue.default,
+      }),
     ),
   });
 
-
   return modules.sort((a, b) => a.title.localeCompare(b.title));
 }
-
 
 async function main() {
   try {
@@ -92,7 +90,6 @@ async function main() {
     await fs.mkdir(OUTPUT_DIR, { recursive: true });
     await fs.writeFile(outputPath, JSON.stringify(transformedData, null, 2));
     console.log(`Transformed schema saved to ${outputPath}`);
-
   } catch (error) {
     console.error('Failed to fetch or process schema:', error);
     process.exit(1);
@@ -100,4 +97,3 @@ async function main() {
 }
 
 main();
-

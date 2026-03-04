@@ -18,34 +18,38 @@ export function ImagePalette() {
 
     setIsExtracting(true);
     try {
-      const response = await fetch('/api/extract-palette', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ url: imageUrl }),
-      });
+      const worker = new Worker(
+        new URL('../workers/color-extraction.worker.ts', import.meta.url),
+        { type: 'module' },
+      );
 
-      if (!response.ok) {
-        const errorData = await response.json();
-        throw new Error(errorData.error || 'Failed to extract palette.');
-      }
+      worker.onmessage = (e) => {
+        if (e.data.type === 'success') {
+          updateConfig({
+            palette: 'extracted',
+            palettes: { extracted: e.data.payload },
+          });
+          addToast('Palette extracted and applied!', 'success');
+        } else if (e.data.type === 'error') {
+          addToast(e.data.error || 'Failed to extract palette.', 'error');
+        }
+        setIsExtracting(false);
+        worker.terminate();
+      };
 
-      const newPalette = await response.json();
+      worker.onerror = (e) => {
+        console.error('Worker error:', e);
+        addToast('Worker failed to extract palette.', 'error');
+        setIsExtracting(false);
+        worker.terminate();
+      };
 
-      updateConfig({
-        palette: 'extracted',
-        palettes: newPalette,
-      });
-
-      addToast('Palette extracted and applied!', 'success');
+      worker.postMessage({ imageUrl });
     } catch (error) {
-      console.error('Extraction error:', error);
       addToast(
         error instanceof Error ? error.message : 'An unknown error occurred.',
         'error',
       );
-    } finally {
       setIsExtracting(false);
     }
   };
