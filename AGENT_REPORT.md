@@ -7,13 +7,11 @@
 ---
 
 ## 🚀 Open Tasks
-
 - [ ] **Task 9: Advanced Performance Profiler**: Estimate prompt rendering latency.
 
 ---
 
 ## ✅ Completed Tasks
-
 - [x] **Task 8: Mobile Optimization**: Responsive sidebar layout and manual toggle between Mobile/Desktop modes.
 - [x] **Task 7: Fix Undo/Redo Input Conflict**: Native text-undo preserved in inputs.
 - [x] **Task 6: Per-Module Live Preview**: Real-time module rendering inside ModuleConfig.
@@ -30,4 +28,4 @@
 
 ---
 
-_Last Updated: Tuesday, March 3, 2026_
+*Last Updated: Tuesday, March 3, 2026*

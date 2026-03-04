@@ -1,10 +1,8 @@
 # Documentation Templates
 
 ## Component Reference Template
-
-````markdown
+```markdown
 ### [Component Name]
-
 [Brief description of purpose.]
 
 **Props**
@@ -13,13 +11,10 @@
 | `propName` | `string` | `''` | [Description] |
 
 **Usage Example**
-
 ```tsx
 <ComponentName propName="value" />
 ```
-````
-
-````
+```
 
 ## Logic/Store Reference Template
 ```markdown
@@ -34,22 +29,18 @@
 
 **Persistence**
 [Details on where and how the data is stored.]
-````
+```
 
 ## Feature Update Template
-
 ```markdown
 ### FEATURE: [Feature Name]
-
 [One sentence on why this was added.]
 
 #### Changes
-
 - **File**: `[Path]`
 - **Logic**: [Technical details on implementation.]
 - **UI**: [Changes to components/views.]
 
 #### Verification
-
 - [List of tests run or manual checks.]
 ```
