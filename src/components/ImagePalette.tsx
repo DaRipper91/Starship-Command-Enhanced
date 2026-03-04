@@ -46,7 +46,6 @@ export function ImagePalette() {
 
       worker.postMessage({ imageUrl });
     } catch (error) {
-      console.error('Extraction error:', error);
       addToast(
         error instanceof Error ? error.message : 'An unknown error occurred.',
         'error',
