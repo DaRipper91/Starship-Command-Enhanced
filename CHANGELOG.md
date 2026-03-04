@@ -1,5 +1,11 @@
 # Changelog
 
+## [1.5.1] - 2026-03-04
+
+### Tests
+
+- **translateThemeToXterm coverage:** Added `src/lib/theme-to-xterm.test.ts` with 5 edge-case tests — empty config, missing named palette, custom palette, global palette fallback, and invalid color fallback (CP-12).
+
 ## [1.5.0] - 2026-03-04
 
 ### Security
