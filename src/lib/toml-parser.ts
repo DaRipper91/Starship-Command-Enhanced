@@ -43,8 +43,8 @@ export class TomlParser {
     try {
       // Create a clean object without undefined values before stringifying
       // as some TOML stringifiers might struggle with undefined
-      const cleanConfig = JSON.parse(JSON.stringify(config));
-      return TOML.stringify(cleanConfig as unknown as TOML.JsonMap);
+      const cleanConfig = JSON.parse(JSON.stringify(config)) as TOML.JsonMap;
+      return TOML.stringify(cleanConfig);
     } catch (error) {
       console.error('Failed to stringify config:', error);
       throw new Error('Failed to generate TOML');
