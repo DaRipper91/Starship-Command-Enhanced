@@ -19,7 +19,10 @@ base_path = get_base_path()
 dist_path = os.path.join(base_path, 'dist') if getattr(sys, 'frozen', False) else os.path.join(base_path, '../dist')
 
 app = Flask(__name__, static_folder=dist_path)
-CORS(app)  # Allow cross-origin requests
+
+# Configure CORS with allowed origins from environment variable
+allowed_origins = os.environ.get("ALLOWED_ORIGINS", "http://localhost:5173,http://127.0.0.1:5173,http://localhost:5001,http://127.0.0.1:5001").split(",")
+CORS(app, origins=allowed_origins)  # Allow cross-origin requests
 
 # Configure database
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///site.db"
