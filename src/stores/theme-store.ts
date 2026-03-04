@@ -1,3 +1,4 @@
+import equal from 'fast-deep-equal';
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
@@ -139,10 +140,7 @@ export const useThemeStore = create<ThemeStore>()(
           };
 
           // Optimization: Don't update if config hasn't changed
-          if (
-            JSON.stringify(state.currentTheme.config) ===
-            JSON.stringify(nextTheme.config)
-          ) {
+          if (equal(state.currentTheme.config, nextTheme.config)) {
             return {};
           }
 
