@@ -69,10 +69,26 @@ const createDefaultTheme = (): Theme => ({
 
 // Helper for deep cloning
 const deepClone = <T>(obj: T): T => {
-  if (typeof structuredClone === 'function') {
-    return structuredClone(obj);
+  if (obj === null || typeof obj !== 'object') {
+    return obj;
   }
-  return JSON.parse(JSON.stringify(obj));
+  if (obj instanceof Date) {
+    return new Date(obj.getTime()) as unknown as T;
+  }
+  if (Array.isArray(obj)) {
+    const arrCopy = [] as unknown[];
+    for (let i = 0; i < obj.length; i++) {
+      arrCopy[i] = deepClone(obj[i]);
+    }
+    return arrCopy as unknown as T;
+  }
+  const objCopy = {} as Record<string, unknown>;
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      objCopy[key] = deepClone((obj as Record<string, unknown>)[key]);
+    }
+  }
+  return objCopy as unknown as T;
 };
 
 export const useThemeStore = create<ThemeStore>()(
