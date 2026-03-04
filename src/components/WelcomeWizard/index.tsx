@@ -15,6 +15,34 @@ import { Theme } from '../../types/starship.types';
 
 //... (imports are the same)
 
+interface ProgressStepProps {
+  stepNumber: number;
+  currentStep: number;
+  label: string;
+}
+
+function ProgressStep({ stepNumber, currentStep, label }: ProgressStepProps) {
+  const isActive = currentStep >= stepNumber;
+  return (
+    <div
+      className={cn(
+        'flex items-center gap-3',
+        isActive ? 'text-blue-400' : 'text-gray-600',
+      )}
+    >
+      <div
+        className={cn(
+          'flex h-8 w-8 items-center justify-center rounded-full border',
+          isActive ? 'border-blue-400 bg-blue-900/20' : 'border-gray-700',
+        )}
+      >
+        {stepNumber}
+      </div>
+      <span className="font-medium">{label}</span>
+    </div>
+  );
+}
+
 export function WelcomeWizard() {
   const { showWelcomeWizard, setShowWelcomeWizard } = useUIStore();
   const [step, setStep] = useState(1);
@@ -53,60 +81,13 @@ export function WelcomeWizard() {
           </div>
 
           <div className="flex flex-col gap-6">
-            <div
-              className={cn(
-                'flex items-center gap-3',
-                step >= 1 ? 'text-blue-400' : 'text-gray-600',
-              )}
-            >
-              <div
-                className={cn(
-                  'flex h-8 w-8 items-center justify-center rounded-full border',
-                  step >= 1
-                    ? 'border-blue-400 bg-blue-900/20'
-                    : 'border-gray-700',
-                )}
-              >
-                1
-              </div>
-              <span className="font-medium">Welcome</span>
-            </div>
-            <div
-              className={cn(
-                'flex items-center gap-3',
-                step >= 2 ? 'text-blue-400' : 'text-gray-600',
-              )}
-            >
-              <div
-                className={cn(
-                  'flex h-8 w-8 items-center justify-center rounded-full border',
-                  step >= 2
-                    ? 'border-blue-400 bg-blue-900/20'
-                    : 'border-gray-700',
-                )}
-              >
-                2
-              </div>
-              <span className="font-medium">Choose Starting Point</span>
-            </div>
-            <div
-              className={cn(
-                'flex items-center gap-3',
-                step >= 3 ? 'text-blue-400' : 'text-gray-600',
-              )}
-            >
-              <div
-                className={cn(
-                  'flex h-8 w-8 items-center justify-center rounded-full border',
-                  step >= 3
-                    ? 'border-blue-400 bg-blue-900/20'
-                    : 'border-gray-700',
-                )}
-              >
-                3
-              </div>
-              <span className="font-medium">Ready</span>
-            </div>
+            <ProgressStep stepNumber={1} currentStep={step} label="Welcome" />
+            <ProgressStep
+              stepNumber={2}
+              currentStep={step}
+              label="Choose Starting Point"
+            />
+            <ProgressStep stepNumber={3} currentStep={step} label="Ready" />
           </div>
 
           <div className="mt-auto">

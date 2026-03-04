@@ -1,5 +1,5 @@
 import { Info } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useConfirmation } from '../contexts/ConfirmationContext';
 import MODULE_DEFINITIONS from '../generated/module-definitions.json';
@@ -60,6 +60,38 @@ export function ModuleConfig() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, [showIconBrowser]);
 
+  // Safe access to module config
+  const moduleConfig = useMemo(() => {
+    return selectedModule
+      ? (currentTheme.config[selectedModule] as BaseModuleConfig) || {}
+      : {};
+  }, [currentTheme.config, selectedModule]);
+
+  const handleChange = useCallback(
+    (key: string, value: string | boolean | number) => {
+      if (!selectedModule) return;
+      updateConfig({
+        [selectedModule]: {
+          ...moduleConfig,
+          [key]: value,
+        },
+      });
+    },
+    [updateConfig, selectedModule, moduleConfig],
+  );
+
+  const handleIconBrowserToggle = useCallback((key: string) => {
+    setShowIconBrowser((prev) => (prev === key ? null : key));
+  }, []);
+
+  const handleIconBrowserSelect = useCallback(
+    (key: string, symbol: string) => {
+      handleChange(key, symbol);
+      setShowIconBrowser(null);
+    },
+    [handleChange],
+  );
+
   if (!selectedModule) {
     return (
       <div className="flex h-full flex-col items-center justify-center rounded-lg border border-dashed border-gray-700 bg-gray-900/20 p-8 text-center">
@@ -73,19 +105,6 @@ export function ModuleConfig() {
       </div>
     );
   }
-
-  // Safe access to module config
-  const moduleConfig =
-    (currentTheme.config[selectedModule] as BaseModuleConfig) || {};
-
-  const handleChange = (key: string, value: string | boolean | number) => {
-    updateConfig({
-      [selectedModule]: {
-        ...moduleConfig,
-        [key]: value,
-      },
-    });
-  };
 
   return (
     <div className="flex flex-col gap-6 rounded-lg border border-gray-700 bg-[#1e1e1e] p-6 shadow-xl">
@@ -141,11 +160,7 @@ export function ModuleConfig() {
               className="w-full rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             />
             <button
-              onClick={() =>
-                setShowIconBrowser(
-                  showIconBrowser === 'symbol' ? null : 'symbol',
-                )
-              }
+              onClick={() => handleIconBrowserToggle('symbol')}
               className="shrink-0 rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
             >
               Browse
@@ -159,10 +174,7 @@ export function ModuleConfig() {
             >
               <IconBrowser
                 currentSymbol={moduleConfig.symbol as string}
-                onSelect={(symbol) => {
-                  handleChange('symbol', symbol);
-                  setShowIconBrowser(null);
-                }}
+                onSelect={(symbol) => handleIconBrowserSelect('symbol', symbol)}
               />
             </div>
           )}
@@ -263,11 +275,7 @@ export function ModuleConfig() {
                       className="w-full rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-100 placeholder-gray-500 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     />
                     <button
-                      onClick={() =>
-                        setShowIconBrowser(
-                          showIconBrowser === key ? null : (key as string),
-                        )
-                      }
+                      onClick={() => handleIconBrowserToggle(key)}
                       className="shrink-0 rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
                     >
                       Browse
@@ -281,10 +289,9 @@ export function ModuleConfig() {
                             key as keyof GitStatusConfig
                           ] as string
                         }
-                        onSelect={(symbol) => {
-                          handleChange(key, symbol);
-                          setShowIconBrowser(null);
-                        }}
+                        onSelect={(symbol) =>
+                          handleIconBrowserSelect(key, symbol)
+                        }
                       />
                     </div>
                   )}

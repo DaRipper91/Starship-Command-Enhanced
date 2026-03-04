@@ -40,10 +40,7 @@
       "default": true
     },
     "palette": {
-      "type": [
-        "string",
-        "null"
-      ]
+      "type": ["string", "null"]
     },
     "palettes": {
       "type": "object",
@@ -114,11 +111,7 @@
         "style": "bold blue",
         "disabled": false,
         "detect_extensions": [],
-        "detect_files": [
-          "buf.yaml",
-          "buf.gen.yaml",
-          "buf.work.yaml"
-        ],
+        "detect_files": ["buf.yaml", "buf.gen.yaml", "buf.work.yaml"],
         "detect_folders": []
       }
     },
@@ -131,11 +124,7 @@
         "style": "bold red",
         "disabled": false,
         "detect_extensions": [],
-        "detect_files": [
-          "bun.lock",
-          "bun.lockb",
-          "bunfig.toml"
-        ],
+        "detect_files": ["bun.lock", "bun.lockb", "bunfig.toml"],
         "detect_folders": []
       }
     },
@@ -147,25 +136,13 @@
         "style": "149 bold",
         "symbol": "C ",
         "disabled": false,
-        "detect_extensions": [
-          "c",
-          "h"
-        ],
+        "detect_extensions": ["c", "h"],
         "detect_files": [],
         "detect_folders": [],
         "commands": [
-          [
-            "cc",
-            "--version"
-          ],
-          [
-            "gcc",
-            "--version"
-          ],
-          [
-            "clang",
-            "--version"
-          ]
+          ["cc", "--version"],
+          ["gcc", "--version"],
+          ["clang", "--version"]
         ]
       }
     },
@@ -191,10 +168,7 @@
         "style": "bold blue",
         "disabled": false,
         "detect_extensions": [],
-        "detect_files": [
-          "CMakeLists.txt",
-          "CMakeCache.txt"
-        ],
+        "detect_files": ["CMakeLists.txt", "CMakeCache.txt"],
         "detect_folders": []
       }
     },
@@ -218,12 +192,7 @@
         "symbol": "⚙️ ",
         "style": "bold blue",
         "disabled": false,
-        "detect_extensions": [
-          "cbl",
-          "cob",
-          "CBL",
-          "COB"
-        ],
+        "detect_extensions": ["cbl", "cob", "CBL", "COB"],
         "detect_files": [],
         "detect_folders": []
       }
@@ -236,9 +205,7 @@
         "symbol": "🅒 ",
         "style": "green bold",
         "ignore_base": true,
-        "detect_env_vars": [
-          "!PIXI_ENVIRONMENT_NAME"
-        ],
+        "detect_env_vars": ["!PIXI_ENVIRONMENT_NAME"],
         "disabled": false
       }
     },
@@ -273,18 +240,9 @@
         "detect_files": [],
         "detect_folders": [],
         "commands": [
-          [
-            "c++",
-            "--version"
-          ],
-          [
-            "g++",
-            "--version"
-          ],
-          [
-            "clang++",
-            "--version"
-          ]
+          ["c++", "--version"],
+          ["g++", "--version"],
+          ["clang++", "--version"]
         ]
       }
     },
@@ -296,12 +254,8 @@
         "symbol": "🔮 ",
         "style": "bold red",
         "disabled": false,
-        "detect_extensions": [
-          "cr"
-        ],
-        "detect_files": [
-          "shard.yml"
-        ],
+        "detect_extensions": ["cr"],
+        "detect_files": ["shard.yml"],
         "detect_folders": []
       }
     },
@@ -314,9 +268,7 @@
         "style": "bold cyan",
         "disabled": false,
         "detect_extensions": [],
-        "detect_files": [
-          "daml.yaml"
-        ],
+        "detect_files": ["daml.yaml"],
         "detect_folders": []
       }
     },
@@ -328,17 +280,9 @@
         "symbol": "🎯 ",
         "style": "bold blue",
         "disabled": false,
-        "detect_extensions": [
-          "dart"
-        ],
-        "detect_files": [
-          "pubspec.yaml",
-          "pubspec.yml",
-          "pubspec.lock"
-        ],
-        "detect_folders": [
-          ".dart_tool"
-        ]
+        "detect_extensions": ["dart"],
+        "detect_files": ["pubspec.yaml", "pubspec.yml", "pubspec.lock"],
+        "detect_folders": [".dart_tool"]
       }
     },
     "deno": {
@@ -391,12 +335,8 @@
         "style": "bold bright-yellow",
         "disabled": true,
         "detect_extensions": [],
-        "detect_env_vars": [
-          "DIRENV_FILE"
-        ],
-        "detect_files": [
-          ".envrc"
-        ],
+        "detect_env_vars": ["DIRENV_FILE"],
+        "detect_files": [".envrc"],
         "detect_folders": [],
         "allowed_msg": "allowed",
         "not_allowed_msg": "not allowed",
@@ -433,11 +373,7 @@
         "style": "blue bold",
         "heuristic": true,
         "disabled": false,
-        "detect_extensions": [
-          "csproj",
-          "fsproj",
-          "xproj"
-        ],
+        "detect_extensions": ["csproj", "fsproj", "xproj"],
         "detect_files": [
           "global.json",
           "project.json",
@@ -457,9 +393,7 @@
         "style": "bold purple",
         "disabled": false,
         "detect_extensions": [],
-        "detect_files": [
-          "mix.exs"
-        ],
+        "detect_files": ["mix.exs"],
         "detect_folders": []
       }
     },
@@ -471,17 +405,9 @@
         "symbol": "🌳 ",
         "style": "cyan bold",
         "disabled": false,
-        "detect_extensions": [
-          "elm"
-        ],
-        "detect_files": [
-          "elm.json",
-          "elm-package.json",
-          ".elm-version"
-        ],
-        "detect_folders": [
-          "elm-stuff"
-        ]
+        "detect_extensions": ["elm"],
+        "detect_files": ["elm.json", "elm-package.json", ".elm-version"],
+        "detect_folders": ["elm-stuff"]
       }
     },
     "env_var": {
@@ -500,10 +426,7 @@
         "style": "bold red",
         "disabled": false,
         "detect_extensions": [],
-        "detect_files": [
-          "rebar.config",
-          "erlang.mk"
-        ],
+        "detect_files": ["rebar.config", "erlang.mk"],
         "detect_folders": []
       }
     },
@@ -515,9 +438,7 @@
         "symbol": "🧅 ",
         "style": "bold green",
         "disabled": true,
-        "detect_extensions": [
-          "fnl"
-        ],
+        "detect_extensions": ["fnl"],
         "detect_files": [],
         "detect_folders": []
       }
@@ -558,23 +479,12 @@
           "f18",
           "F18"
         ],
-        "detect_files": [
-          "fpm.toml"
-        ],
+        "detect_files": ["fpm.toml"],
         "detect_folders": [],
         "commands": [
-          [
-            "gfortran",
-            "--version"
-          ],
-          [
-            "flang",
-            "--version"
-          ],
-          [
-            "flang-new",
-            "--version"
-          ]
+          ["gfortran", "--version"],
+          ["flang", "--version"],
+          ["flang-new", "--version"]
         ]
       }
     },
@@ -695,12 +605,8 @@
         "symbol": "⭐ ",
         "style": "bold #FFAFF3",
         "disabled": false,
-        "detect_extensions": [
-          "gleam"
-        ],
-        "detect_files": [
-          "gleam.toml"
-        ],
+        "detect_extensions": ["gleam"],
+        "detect_files": ["gleam.toml"],
         "detect_folders": []
       }
     },
@@ -713,9 +619,7 @@
         "style": "bold cyan",
         "disabled": false,
         "not_capable_style": "bold red",
-        "detect_extensions": [
-          "go"
-        ],
+        "detect_extensions": ["go"],
         "detect_files": [
           "go.mod",
           "go.sum",
@@ -725,9 +629,7 @@
           "Gopkg.lock",
           ".go-version"
         ],
-        "detect_folders": [
-          "Godeps"
-        ]
+        "detect_folders": ["Godeps"]
       }
     },
     "gradle": {
@@ -739,14 +641,9 @@
         "style": "bold bright-cyan",
         "disabled": false,
         "recursive": false,
-        "detect_extensions": [
-          "gradle",
-          "gradle.kts"
-        ],
+        "detect_extensions": ["gradle", "gradle.kts"],
         "detect_files": [],
-        "detect_folders": [
-          "gradle"
-        ]
+        "detect_folders": ["gradle"]
       }
     },
     "guix_shell": {
@@ -766,15 +663,8 @@
         "symbol": "λ ",
         "style": "bold purple",
         "disabled": false,
-        "detect_extensions": [
-          "hs",
-          "cabal",
-          "hs-boot"
-        ],
-        "detect_files": [
-          "stack.yaml",
-          "cabal.project"
-        ],
+        "detect_extensions": ["hs", "cabal", "hs-boot"],
+        "detect_files": ["stack.yaml", "cabal.project"],
         "detect_folders": []
       }
     },
@@ -786,19 +676,9 @@
         "symbol": "⌘ ",
         "style": "bold fg:202",
         "disabled": false,
-        "detect_extensions": [
-          "hx",
-          "hxml"
-        ],
-        "detect_files": [
-          "haxelib.json",
-          "hxformat.json",
-          ".haxerc"
-        ],
-        "detect_folders": [
-          ".haxelib",
-          "haxe_libraries"
-        ]
+        "detect_extensions": ["hx", "hxml"],
+        "detect_files": ["haxelib.json", "hxformat.json", ".haxerc"],
+        "detect_folders": [".haxelib", "haxe_libraries"]
       }
     },
     "helm": {
@@ -810,10 +690,7 @@
         "style": "bold white",
         "disabled": false,
         "detect_extensions": [],
-        "detect_files": [
-          "helmfile.yaml",
-          "Chart.yaml"
-        ],
+        "detect_files": ["helmfile.yaml", "Chart.yaml"],
         "detect_folders": []
       }
     },
@@ -865,14 +742,7 @@
         "version_format": "v${raw}",
         "style": "red dimmed",
         "symbol": "☕ ",
-        "detect_extensions": [
-          "java",
-          "class",
-          "jar",
-          "gradle",
-          "clj",
-          "cljc"
-        ],
+        "detect_extensions": ["java", "class", "jar", "gradle", "clj", "cljc"],
         "detect_files": [
           "pom.xml",
           "build.gradle.kts",
@@ -906,13 +776,8 @@
         "symbol": "ஃ ",
         "style": "bold purple",
         "disabled": false,
-        "detect_extensions": [
-          "jl"
-        ],
-        "detect_files": [
-          "Project.toml",
-          "Manifest.toml"
-        ],
+        "detect_extensions": ["jl"],
+        "detect_files": ["Project.toml", "Manifest.toml"],
         "detect_folders": []
       }
     },
@@ -925,10 +790,7 @@
         "style": "bold blue",
         "kotlin_binary": "kotlin",
         "disabled": false,
-        "detect_extensions": [
-          "kt",
-          "kts"
-        ],
+        "detect_extensions": ["kt", "kts"],
         "detect_files": [],
         "detect_folders": []
       }
@@ -973,15 +835,9 @@
         "style": "bold blue",
         "lua_binary": "lua",
         "disabled": false,
-        "detect_extensions": [
-          "lua"
-        ],
-        "detect_files": [
-          ".lua-version"
-        ],
-        "detect_folders": [
-          "lua"
-        ]
+        "detect_extensions": ["lua"],
+        "detect_files": [".lua-version"],
+        "detect_folders": ["lua"]
       }
     },
     "memory_usage": {
@@ -1019,9 +875,7 @@
           ".mise.toml",
           ".mise.local.toml"
         ],
-        "detect_folders": [
-          ".mise"
-        ],
+        "detect_folders": [".mise"],
         "healthy_symbol": "healthy",
         "unhealthy_symbol": "unhealthy"
       }
@@ -1033,10 +887,7 @@
         "symbol": "🔥 ",
         "style": "bold 208",
         "disabled": false,
-        "detect_extensions": [
-          "mojo",
-          "🔥"
-        ],
+        "detect_extensions": ["mojo", "🔥"],
         "detect_files": [],
         "detect_folders": []
       }
@@ -1067,14 +918,8 @@
         "symbol": "👑 ",
         "style": "yellow bold",
         "disabled": false,
-        "detect_extensions": [
-          "nim",
-          "nims",
-          "nimble"
-        ],
-        "detect_files": [
-          "nim.cfg"
-        ],
+        "detect_extensions": ["nim", "nims", "nimble"],
+        "detect_files": ["nim.cfg"],
         "detect_folders": []
       }
     },
@@ -1100,14 +945,7 @@
         "style": "bold green",
         "disabled": false,
         "not_capable_style": "bold red",
-        "detect_extensions": [
-          "js",
-          "mjs",
-          "cjs",
-          "ts",
-          "mts",
-          "cts"
-        ],
+        "detect_extensions": ["js", "mjs", "cjs", "ts", "mts", "cts"],
         "detect_files": [
           "package.json",
           ".node-version",
@@ -1116,9 +954,7 @@
           "!bun.lock",
           "!bun.lockb"
         ],
-        "detect_folders": [
-          "node_modules"
-        ]
+        "detect_folders": ["node_modules"]
       }
     },
     "ocaml": {
@@ -1131,13 +967,7 @@
         "symbol": "🐫 ",
         "style": "bold yellow",
         "disabled": false,
-        "detect_extensions": [
-          "opam",
-          "ml",
-          "mli",
-          "re",
-          "rei"
-        ],
+        "detect_extensions": ["opam", "ml", "mli", "re", "rei"],
         "detect_files": [
           "dune",
           "dune-project",
@@ -1145,10 +975,7 @@
           "jbuild-ignore",
           ".merlin"
         ],
-        "detect_folders": [
-          "_opam",
-          "esy.lock"
-        ]
+        "detect_folders": ["_opam", "esy.lock"]
       }
     },
     "odin": {
@@ -1159,9 +986,7 @@
         "symbol": "Ø ",
         "style": "bold bright-blue",
         "disabled": false,
-        "detect_extensions": [
-          "odin"
-        ],
+        "detect_extensions": ["odin"],
         "detect_files": [],
         "detect_folders": []
       }
@@ -1174,9 +999,7 @@
         "symbol": "🪖 ",
         "style": "bold blue",
         "disabled": false,
-        "detect_extensions": [
-          "rego"
-        ],
+        "detect_extensions": ["rego"],
         "detect_files": [],
         "detect_folders": []
       }
@@ -1277,11 +1100,7 @@
         "symbol": "🐪 ",
         "style": "149 bold",
         "disabled": false,
-        "detect_extensions": [
-          "pl",
-          "pm",
-          "pod"
-        ],
+        "detect_extensions": ["pl", "pm", "pod"],
         "detect_files": [
           "Makefile.PL",
           "Build.PL",
@@ -1302,13 +1121,8 @@
         "symbol": "🐘 ",
         "style": "147 bold",
         "disabled": false,
-        "detect_extensions": [
-          "php"
-        ],
-        "detect_files": [
-          "composer.json",
-          ".php-version"
-        ],
+        "detect_extensions": ["php"],
+        "detect_files": ["composer.json", ".php-version"],
         "detect_folders": []
       }
     },
@@ -1326,9 +1140,7 @@
     "pixi": {
       "$ref": "#/$defs/PixiConfig",
       "default": {
-        "pixi_binary": [
-          "pixi"
-        ],
+        "pixi_binary": ["pixi"],
         "show_default_environment": true,
         "format": "via [$symbol($version )(\\($environment\\) )]($style)",
         "version_format": "v${raw}",
@@ -1336,10 +1148,7 @@
         "style": "yellow bold",
         "disabled": false,
         "detect_extensions": [],
-        "detect_files": [
-          "pixi.toml",
-          "pixi.lock"
-        ],
+        "detect_files": ["pixi.toml", "pixi.lock"],
         "detect_folders": []
       }
     },
@@ -1362,14 +1171,8 @@
         "symbol": "<=> ",
         "style": "bold white",
         "disabled": false,
-        "detect_extensions": [
-          "purs"
-        ],
-        "detect_files": [
-          "spago.dhall",
-          "spago.yaml",
-          "spago.lock"
-        ],
+        "detect_extensions": ["purs"],
+        "detect_files": ["spago.dhall", "spago.yaml", "spago.lock"],
         "detect_folders": []
       }
     },
@@ -1378,26 +1181,13 @@
       "default": {
         "pyenv_version_name": false,
         "pyenv_prefix": "pyenv ",
-        "python_binary": [
-          [
-            "python"
-          ],
-          [
-            "python3"
-          ],
-          [
-            "python2"
-          ]
-        ],
+        "python_binary": [["python"], ["python3"], ["python2"]],
         "format": "via [${symbol}${pyenv_prefix}(${version} )(\\($virtualenv\\) )]($style)",
         "version_format": "v${raw}",
         "style": "yellow bold",
         "symbol": "🐍 ",
         "disabled": false,
-        "detect_extensions": [
-          "py",
-          "ipynb"
-        ],
+        "detect_extensions": ["py", "ipynb"],
         "detect_files": [
           "requirements.txt",
           ".python-version",
@@ -1408,9 +1198,7 @@
           "__init__.py"
         ],
         "detect_folders": [],
-        "detect_env_vars": [
-          "VIRTUAL_ENV"
-        ]
+        "detect_env_vars": ["VIRTUAL_ENV"]
       }
     },
     "quarto": {
@@ -1421,12 +1209,8 @@
         "symbol": "⨁ ",
         "style": "bold #75AADB",
         "disabled": false,
-        "detect_extensions": [
-          "qmd"
-        ],
-        "detect_files": [
-          "_quarto.yml"
-        ],
+        "detect_extensions": ["qmd"],
+        "detect_files": ["_quarto.yml"],
         "detect_folders": []
       }
     },
@@ -1438,16 +1222,8 @@
         "symbol": "🦋 ",
         "style": "149 bold",
         "disabled": false,
-        "detect_extensions": [
-          "p6",
-          "pm6",
-          "pod6",
-          "raku",
-          "rakumod"
-        ],
-        "detect_files": [
-          "META6.json"
-        ],
+        "detect_extensions": ["p6", "pm6", "pod6", "raku", "rakumod"],
+        "detect_files": ["META6.json"],
         "detect_folders": []
       }
     },
@@ -1459,10 +1235,7 @@
         "symbol": "🔺 ",
         "style": "red bold",
         "disabled": false,
-        "detect_extensions": [
-          "red",
-          "reds"
-        ],
+        "detect_extensions": ["red", "reds"],
         "detect_files": [],
         "detect_folders": []
       }
@@ -1475,19 +1248,9 @@
         "style": "blue bold",
         "symbol": "📐 ",
         "disabled": false,
-        "detect_extensions": [
-          "R",
-          "Rd",
-          "Rmd",
-          "Rproj",
-          "Rsx"
-        ],
-        "detect_files": [
-          "DESCRIPTION"
-        ],
-        "detect_folders": [
-          ".Rproj.user"
-        ]
+        "detect_extensions": ["R", "Rd", "Rmd", "Rproj", "Rsx"],
+        "detect_files": ["DESCRIPTION"],
+        "detect_folders": [".Rproj.user"]
       }
     },
     "ruby": {
@@ -1498,18 +1261,10 @@
         "symbol": "💎 ",
         "style": "bold red",
         "disabled": false,
-        "detect_extensions": [
-          "rb"
-        ],
-        "detect_files": [
-          "Gemfile",
-          ".ruby-version"
-        ],
+        "detect_extensions": ["rb"],
+        "detect_files": ["Gemfile", ".ruby-version"],
         "detect_folders": [],
-        "detect_variables": [
-          "RUBY_VERSION",
-          "RBENV_VERSION"
-        ]
+        "detect_variables": ["RUBY_VERSION", "RBENV_VERSION"]
       }
     },
     "rust": {
@@ -1520,12 +1275,8 @@
         "symbol": "🦀 ",
         "style": "bold red",
         "disabled": false,
-        "detect_extensions": [
-          "rs"
-        ],
-        "detect_files": [
-          "Cargo.toml"
-        ],
+        "detect_extensions": ["rs"],
+        "detect_files": ["Cargo.toml"],
         "detect_folders": []
       }
     },
@@ -1537,18 +1288,9 @@
         "disabled": false,
         "style": "red bold",
         "symbol": "🆂 ",
-        "detect_extensions": [
-          "sbt",
-          "scala"
-        ],
-        "detect_files": [
-          ".scalaenv",
-          ".sbtenv",
-          "build.sbt"
-        ],
-        "detect_folders": [
-          ".metals"
-        ]
+        "detect_extensions": ["sbt", "scala"],
+        "detect_files": [".scalaenv", ".sbtenv", "build.sbt"],
+        "detect_folders": [".metals"]
       }
     },
     "shell": {
@@ -1599,12 +1341,8 @@
         "disabled": false,
         "style": "bold blue",
         "symbol": "S ",
-        "compiler": [
-          "solc"
-        ],
-        "detect_extensions": [
-          "sol"
-        ],
+        "compiler": ["solc"],
+        "detect_extensions": ["sol"],
         "detect_files": [],
         "detect_folders": []
       }
@@ -1656,12 +1394,8 @@
         "symbol": "🐦 ",
         "style": "bold 202",
         "disabled": false,
-        "detect_extensions": [
-          "swift"
-        ],
-        "detect_files": [
-          "Package.swift"
-        ],
+        "detect_extensions": ["swift"],
+        "detect_files": ["Package.swift"],
         "detect_folders": []
       }
     },
@@ -1673,24 +1407,12 @@
         "symbol": "💠 ",
         "style": "bold 105",
         "disabled": false,
-        "detect_extensions": [
-          "tf",
-          "tfplan",
-          "tfstate"
-        ],
+        "detect_extensions": ["tf", "tfplan", "tfstate"],
         "detect_files": [],
-        "detect_folders": [
-          ".terraform"
-        ],
+        "detect_folders": [".terraform"],
         "commands": [
-          [
-            "terraform",
-            "version"
-          ],
-          [
-            "tofu",
-            "version"
-          ]
+          ["terraform", "version"],
+          ["tofu", "version"]
         ]
       }
     },
@@ -1713,12 +1435,8 @@
         "symbol": "t ",
         "style": "bold #0093A7",
         "disabled": false,
-        "detect_extensions": [
-          "typ"
-        ],
-        "detect_files": [
-          "template.typ"
-        ],
+        "detect_extensions": ["typ"],
+        "detect_files": ["template.typ"],
         "detect_folders": []
       }
     },
@@ -1743,9 +1461,7 @@
         "style": "cyan bold",
         "disabled": false,
         "detect_extensions": [],
-        "detect_files": [
-          "Vagrantfile"
-        ],
+        "detect_files": ["Vagrantfile"],
         "detect_folders": []
       }
     },
@@ -1766,14 +1482,8 @@
         "symbol": "V ",
         "style": "blue bold",
         "disabled": false,
-        "detect_extensions": [
-          "v"
-        ],
-        "detect_files": [
-          "v.mod",
-          "vpkg.json",
-          ".vpkg-lock.json"
-        ],
+        "detect_extensions": ["v"],
+        "detect_files": ["v.mod", "vpkg.json", ".vpkg-lock.json"],
         "detect_folders": []
       }
     },
@@ -1786,9 +1496,7 @@
         "style": "bold green",
         "disabled": false,
         "detect_extensions": [],
-        "detect_files": [
-          "xmake.lua"
-        ],
+        "detect_files": ["xmake.lua"],
         "detect_folders": []
       }
     },
@@ -1800,9 +1508,7 @@
         "symbol": "↯ ",
         "style": "bold yellow",
         "disabled": false,
-        "detect_extensions": [
-          "zig"
-        ],
+        "detect_extensions": ["zig"],
         "detect_files": [],
         "detect_folders": []
       }
@@ -1961,17 +1667,11 @@
           "default": "red bold"
         },
         "charging_symbol": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "default": null
         },
         "discharging_symbol": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "default": null
         }
       },
@@ -2012,11 +1712,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "buf.yaml",
-            "buf.gen.yaml",
-            "buf.work.yaml"
-          ]
+          "default": ["buf.yaml", "buf.gen.yaml", "buf.work.yaml"]
         },
         "detect_folders": {
           "type": "array",
@@ -2063,11 +1759,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "bun.lock",
-            "bun.lockb",
-            "bunfig.toml"
-          ]
+          "default": ["bun.lock", "bun.lockb", "bunfig.toml"]
         },
         "detect_folders": {
           "type": "array",
@@ -2107,10 +1799,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "c",
-            "h"
-          ]
+          "default": ["c", "h"]
         },
         "detect_files": {
           "type": "array",
@@ -2135,18 +1824,9 @@
             }
           },
           "default": [
-            [
-              "cc",
-              "--version"
-            ],
-            [
-              "gcc",
-              "--version"
-            ],
-            [
-              "clang",
-              "--version"
-            ]
+            ["cc", "--version"],
+            ["gcc", "--version"],
+            ["clang", "--version"]
           ]
         }
       },
@@ -2225,10 +1905,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "CMakeLists.txt",
-            "CMakeCache.txt"
-          ]
+          "default": ["CMakeLists.txt", "CMakeCache.txt"]
         },
         "detect_folders": {
           "type": "array",
@@ -2274,10 +1951,7 @@
           "default": 45000
         },
         "notification_timeout": {
-          "type": [
-            "integer",
-            "null"
-          ],
+          "type": ["integer", "null"],
           "format": "uint32",
           "minimum": 0
         }
@@ -2312,12 +1986,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "cbl",
-            "cob",
-            "CBL",
-            "COB"
-          ]
+          "default": ["cbl", "cob", "CBL", "COB"]
         },
         "detect_files": {
           "type": "array",
@@ -2366,9 +2035,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "!PIXI_ENVIRONMENT_NAME"
-          ]
+          "default": ["!PIXI_ENVIRONMENT_NAME"]
         },
         "disabled": {
           "type": "boolean",
@@ -2427,18 +2094,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "cr"
-          ]
+          "default": ["cr"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "shard.yml"
-          ]
+          "default": ["shard.yml"]
         },
         "detect_folders": {
           "type": "array",
@@ -2485,9 +2148,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "daml.yaml"
-          ]
+          "default": ["daml.yaml"]
         },
         "detect_folders": {
           "type": "array",
@@ -2527,29 +2188,21 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "dart"
-          ]
+          "default": ["dart"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "pubspec.yaml",
-            "pubspec.yml",
-            "pubspec.lock"
-          ]
+          "default": ["pubspec.yaml", "pubspec.yml", "pubspec.lock"]
         },
         "detect_folders": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            ".dart_tool"
-          ]
+          "default": [".dart_tool"]
         }
       },
       "additionalProperties": false
@@ -2650,17 +2303,11 @@
           "default": "cyan bold"
         },
         "repo_root_style": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "default": null
         },
         "before_repo_root_style": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "default": null
         },
         "disabled": {
@@ -2721,18 +2368,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "DIRENV_FILE"
-          ]
+          "default": ["DIRENV_FILE"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            ".envrc"
-          ]
+          "default": [".envrc"]
         },
         "detect_folders": {
           "type": "array",
@@ -2849,11 +2492,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "csproj",
-            "fsproj",
-            "xproj"
-          ]
+          "default": ["csproj", "fsproj", "xproj"]
         },
         "detect_files": {
           "type": "array",
@@ -2913,9 +2552,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "mix.exs"
-          ]
+          "default": ["mix.exs"]
         },
         "detect_folders": {
           "type": "array",
@@ -2955,29 +2592,21 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "elm"
-          ]
+          "default": ["elm"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "elm.json",
-            "elm-package.json",
-            ".elm-version"
-          ]
+          "default": ["elm.json", "elm-package.json", ".elm-version"]
         },
         "detect_folders": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "elm-stuff"
-          ]
+          "default": ["elm-stuff"]
         }
       },
       "additionalProperties": false
@@ -2994,16 +2623,10 @@
           "default": "black bold dimmed"
         },
         "variable": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "default": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "format": {
           "type": "string",
@@ -3055,10 +2678,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "rebar.config",
-            "erlang.mk"
-          ]
+          "default": ["rebar.config", "erlang.mk"]
         },
         "detect_folders": {
           "type": "array",
@@ -3098,9 +2718,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "fnl"
-          ]
+          "default": ["fnl"]
         },
         "detect_files": {
           "type": "array",
@@ -3191,9 +2809,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "fpm.toml"
-          ]
+          "default": ["fpm.toml"]
         },
         "detect_folders": {
           "type": "array",
@@ -3211,18 +2827,9 @@
             }
           },
           "default": [
-            [
-              "gfortran",
-              "--version"
-            ],
-            [
-              "flang",
-              "--version"
-            ],
-            [
-              "flang-new",
-              "--version"
-            ]
+            ["gfortran", "--version"],
+            ["flang", "--version"],
+            ["flang-new", "--version"]
           ]
         }
       },
@@ -3568,10 +3175,7 @@
           "default": false
         },
         "windows_starship": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         }
       },
       "additionalProperties": false
@@ -3604,18 +3208,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "gleam"
-          ]
+          "default": ["gleam"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "gleam.toml"
-          ]
+          "default": ["gleam.toml"]
         },
         "detect_folders": {
           "type": "array",
@@ -3659,9 +3259,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "go"
-          ]
+          "default": ["go"]
         },
         "detect_files": {
           "type": "array",
@@ -3683,9 +3281,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "Godeps"
-          ]
+          "default": ["Godeps"]
         }
       },
       "additionalProperties": false
@@ -3722,10 +3318,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "gradle",
-            "gradle.kts"
-          ]
+          "default": ["gradle", "gradle.kts"]
         },
         "detect_files": {
           "type": "array",
@@ -3739,9 +3332,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "gradle"
-          ]
+          "default": ["gradle"]
         }
       },
       "additionalProperties": false
@@ -3796,21 +3387,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "hs",
-            "cabal",
-            "hs-boot"
-          ]
+          "default": ["hs", "cabal", "hs-boot"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "stack.yaml",
-            "cabal.project"
-          ]
+          "default": ["stack.yaml", "cabal.project"]
         },
         "detect_folders": {
           "type": "array",
@@ -3850,31 +3434,21 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "hx",
-            "hxml"
-          ]
+          "default": ["hx", "hxml"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "haxelib.json",
-            "hxformat.json",
-            ".haxerc"
-          ]
+          "default": ["haxelib.json", "hxformat.json", ".haxerc"]
         },
         "detect_folders": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            ".haxelib",
-            "haxe_libraries"
-          ]
+          "default": [".haxelib", "haxe_libraries"]
         }
       },
       "additionalProperties": false
@@ -3914,10 +3488,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "helmfile.yaml",
-            "Chart.yaml"
-          ]
+          "default": ["helmfile.yaml", "Chart.yaml"]
         },
         "detect_folders": {
           "type": "array",
@@ -4082,14 +3653,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "java",
-            "class",
-            "jar",
-            "gradle",
-            "clj",
-            "cljc"
-          ]
+          "default": ["java", "class", "jar", "gradle", "clj", "cljc"]
         },
         "detect_files": {
           "type": "array",
@@ -4182,19 +3746,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "jl"
-          ]
+          "default": ["jl"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "Project.toml",
-            "Manifest.toml"
-          ]
+          "default": ["Project.toml", "Manifest.toml"]
         },
         "detect_folders": {
           "type": "array",
@@ -4238,10 +3797,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "kt",
-            "kts"
-          ]
+          "default": ["kt", "kts"]
         },
         "detect_files": {
           "type": "array",
@@ -4339,38 +3895,23 @@
           "default": ""
         },
         "user_pattern": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "default": null
         },
         "symbol": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "default": null
         },
         "style": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "default": null
         },
         "context_alias": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "default": null
         },
         "user_alias": {
-          "type": [
-            "string",
-            "null"
-          ],
+          "type": ["string", "null"],
           "default": null
         }
       },
@@ -4440,27 +3981,21 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "lua"
-          ]
+          "default": ["lua"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            ".lua-version"
-          ]
+          "default": [".lua-version"]
         },
         "detect_folders": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "lua"
-          ]
+          "default": ["lua"]
         }
       },
       "additionalProperties": false
@@ -4567,9 +4102,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            ".mise"
-          ]
+          "default": [".mise"]
         },
         "healthy_symbol": {
           "type": "string",
@@ -4606,10 +4139,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "mojo",
-            "🔥"
-          ]
+          "default": ["mojo", "🔥"]
         },
         "detect_files": {
           "type": "array",
@@ -4700,20 +4230,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "nim",
-            "nims",
-            "nimble"
-          ]
+          "default": ["nim", "nims", "nimble"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "nim.cfg"
-          ]
+          "default": ["nim.cfg"]
         },
         "detect_folders": {
           "type": "array",
@@ -4795,14 +4319,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "js",
-            "mjs",
-            "cjs",
-            "ts",
-            "mts",
-            "cts"
-          ]
+          "default": ["js", "mjs", "cjs", "ts", "mts", "cts"]
         },
         "detect_files": {
           "type": "array",
@@ -4823,9 +4340,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "node_modules"
-          ]
+          "default": ["node_modules"]
         }
       },
       "additionalProperties": false
@@ -4866,13 +4381,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "opam",
-            "ml",
-            "mli",
-            "re",
-            "rei"
-          ]
+          "default": ["opam", "ml", "mli", "re", "rei"]
         },
         "detect_files": {
           "type": "array",
@@ -4892,10 +4401,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "_opam",
-            "esy.lock"
-          ]
+          "default": ["_opam", "esy.lock"]
         }
       },
       "additionalProperties": false
@@ -4928,9 +4434,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "odin"
-          ]
+          "default": ["odin"]
         },
         "detect_files": {
           "type": "array",
@@ -4977,9 +4481,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "rego"
-          ]
+          "default": ["rego"]
         },
         "detect_files": {
           "type": "array",
@@ -5162,11 +4664,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "pl",
-            "pm",
-            "pod"
-          ]
+          "default": ["pl", "pm", "pod"]
         },
         "detect_files": {
           "type": "array",
@@ -5221,19 +4719,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "php"
-          ]
+          "default": ["php"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "composer.json",
-            ".php-version"
-          ]
+          "default": ["composer.json", ".php-version"]
         },
         "detect_folders": {
           "type": "array",
@@ -5281,9 +4774,7 @@
       "properties": {
         "pixi_binary": {
           "$ref": "#/$defs/Either",
-          "default": [
-            "pixi"
-          ]
+          "default": ["pixi"]
         },
         "show_default_environment": {
           "type": "boolean",
@@ -5321,10 +4812,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "pixi.toml",
-            "pixi.lock"
-          ]
+          "default": ["pixi.toml", "pixi.lock"]
         },
         "detect_folders": {
           "type": "array",
@@ -5407,20 +4895,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "purs"
-          ]
+          "default": ["purs"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "spago.dhall",
-            "spago.yaml",
-            "spago.lock"
-          ]
+          "default": ["spago.dhall", "spago.yaml", "spago.lock"]
         },
         "detect_folders": {
           "type": "array",
@@ -5445,17 +4927,7 @@
         },
         "python_binary": {
           "$ref": "#/$defs/Either",
-          "default": [
-            [
-              "python"
-            ],
-            [
-              "python3"
-            ],
-            [
-              "python2"
-            ]
-          ]
+          "default": [["python"], ["python3"], ["python2"]]
         },
         "format": {
           "type": "string",
@@ -5482,10 +4954,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "py",
-            "ipynb"
-          ]
+          "default": ["py", "ipynb"]
         },
         "detect_files": {
           "type": "array",
@@ -5514,9 +4983,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "VIRTUAL_ENV"
-          ]
+          "default": ["VIRTUAL_ENV"]
         }
       },
       "additionalProperties": false
@@ -5549,18 +5016,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "qmd"
-          ]
+          "default": ["qmd"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "_quarto.yml"
-          ]
+          "default": ["_quarto.yml"]
         },
         "detect_folders": {
           "type": "array",
@@ -5600,22 +5063,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "p6",
-            "pm6",
-            "pod6",
-            "raku",
-            "rakumod"
-          ]
+          "default": ["p6", "pm6", "pod6", "raku", "rakumod"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "META6.json"
-          ]
+          "default": ["META6.json"]
         },
         "detect_folders": {
           "type": "array",
@@ -5655,10 +5110,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "red",
-            "reds"
-          ]
+          "default": ["red", "reds"]
         },
         "detect_files": {
           "type": "array",
@@ -5705,31 +5157,21 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "R",
-            "Rd",
-            "Rmd",
-            "Rproj",
-            "Rsx"
-          ]
+          "default": ["R", "Rd", "Rmd", "Rproj", "Rsx"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "DESCRIPTION"
-          ]
+          "default": ["DESCRIPTION"]
         },
         "detect_folders": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            ".Rproj.user"
-          ]
+          "default": [".Rproj.user"]
         }
       },
       "additionalProperties": false
@@ -5762,19 +5204,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "rb"
-          ]
+          "default": ["rb"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "Gemfile",
-            ".ruby-version"
-          ]
+          "default": ["Gemfile", ".ruby-version"]
         },
         "detect_folders": {
           "type": "array",
@@ -5788,10 +5225,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "RUBY_VERSION",
-            "RBENV_VERSION"
-          ]
+          "default": ["RUBY_VERSION", "RBENV_VERSION"]
         }
       },
       "additionalProperties": false
@@ -5824,18 +5258,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "rs"
-          ]
+          "default": ["rs"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "Cargo.toml"
-          ]
+          "default": ["Cargo.toml"]
         },
         "detect_folders": {
           "type": "array",
@@ -5875,30 +5305,21 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "sbt",
-            "scala"
-          ]
+          "default": ["sbt", "scala"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            ".scalaenv",
-            ".sbtenv",
-            "build.sbt"
-          ]
+          "default": [".scalaenv", ".sbtenv", "build.sbt"]
         },
         "detect_folders": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            ".metals"
-          ]
+          "default": [".metals"]
         }
       },
       "additionalProperties": false
@@ -5927,10 +5348,7 @@
           "default": "psh"
         },
         "pwsh_indicator": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "ion_indicator": {
           "type": "string",
@@ -6055,18 +5473,14 @@
         },
         "compiler": {
           "$ref": "#/$defs/Either",
-          "default": [
-            "solc"
-          ]
+          "default": ["solc"]
         },
         "detect_extensions": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "sol"
-          ]
+          "default": ["sol"]
         },
         "detect_files": {
           "type": "array",
@@ -6149,16 +5563,10 @@
           "default": "bold red"
         },
         "success_style": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "failure_style": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "map_symbol": {
           "type": "boolean",
@@ -6181,10 +5589,7 @@
           "default": "\\[$pipestatus\\] => [$symbol$common_meaning$signal_name$maybe_int]($style) "
         },
         "pipestatus_segment_format": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "disabled": {
           "type": "boolean",
@@ -6247,18 +5652,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "swift"
-          ]
+          "default": ["swift"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "Package.swift"
-          ]
+          "default": ["Package.swift"]
         },
         "detect_folders": {
           "type": "array",
@@ -6298,11 +5699,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "tf",
-            "tfplan",
-            "tfstate"
-          ]
+          "default": ["tf", "tfplan", "tfstate"]
         },
         "detect_files": {
           "type": "array",
@@ -6316,9 +5713,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            ".terraform"
-          ]
+          "default": [".terraform"]
         },
         "commands": {
           "type": "array",
@@ -6329,14 +5724,8 @@
             }
           },
           "default": [
-            [
-              "terraform",
-              "version"
-            ],
-            [
-              "tofu",
-              "version"
-            ]
+            ["terraform", "version"],
+            ["tofu", "version"]
           ]
         }
       },
@@ -6358,10 +5747,7 @@
           "default": false
         },
         "time_format": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "disabled": {
           "type": "boolean",
@@ -6406,18 +5792,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "typ"
-          ]
+          "default": ["typ"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "template.typ"
-          ]
+          "default": ["template.typ"]
         },
         "detect_folders": {
           "type": "array",
@@ -6504,9 +5886,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "Vagrantfile"
-          ]
+          "default": ["Vagrantfile"]
         },
         "detect_folders": {
           "type": "array",
@@ -6568,20 +5948,14 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "v"
-          ]
+          "default": ["v"]
         },
         "detect_files": {
           "type": "array",
           "items": {
             "type": "string"
           },
-          "default": [
-            "v.mod",
-            "vpkg.json",
-            ".vpkg-lock.json"
-          ]
+          "default": ["v.mod", "vpkg.json", ".vpkg-lock.json"]
         },
         "detect_folders": {
           "type": "array",
@@ -6628,9 +6002,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "xmake.lua"
-          ]
+          "default": ["xmake.lua"]
         },
         "detect_folders": {
           "type": "array",
@@ -6670,9 +6042,7 @@
           "items": {
             "type": "string"
           },
-          "default": [
-            "zig"
-          ]
+          "default": ["zig"]
         },
         "detect_files": {
           "type": "array",
@@ -6752,16 +6122,10 @@
           "default": []
         },
         "os": {
-          "type": [
-            "string",
-            "null"
-          ]
+          "type": ["string", "null"]
         },
         "use_stdin": {
-          "type": [
-            "boolean",
-            "null"
-          ]
+          "type": ["boolean", "null"]
         },
         "ignore_timeout": {
           "type": "boolean",

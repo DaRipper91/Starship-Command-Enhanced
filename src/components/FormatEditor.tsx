@@ -158,11 +158,32 @@ export function FormatEditor({ formatString, onChange }: FormatEditorProps) {
     setEditingSegment(null);
   };
 
+  const handleAddText = () => addSegment('text');
+  const handleAddModule = () => addSegment('module');
+  const handleAddStyledText = () => addSegment('styledText');
+
   const availableModules = MODULE_DEFINITIONS.map((m) => m.name);
 
   const renderSegmentEditor = () => {
     if (editingSegment === null) return null;
     const segment = segments[editingSegment];
+
+    const handleIconSelect = (icon: string) => {
+      setShowIconBrowser(false);
+
+      // If module, update module's symbol in global config (more complex)
+      // For now, let's assume it's for styledText's text or directly injecting into module's symbol setting.
+      // For module, a direct symbol field is better handled in ModuleConfig, so here we modify the text of styledText.
+      if (segment.type !== 'styledText') {
+        // This would need to update currentTheme.config[segment.value].symbol
+        // For now, just update the text of the displayed segment
+        // A more robust solution would be to edit the module's actual symbol prop in theme-store
+        return;
+      }
+
+      handleSegmentChange(editingSegment, { text: icon });
+      setActiveText(icon);
+    };
 
     return (
       <div className="mt-4 flex flex-col gap-3 rounded-lg border border-gray-700 bg-gray-800 p-4 shadow-inner">
@@ -237,20 +258,7 @@ export function FormatEditor({ formatString, onChange }: FormatEditorProps) {
                           ?.symbol || ''
                       : (segment as StyledTextSegment).text
                   }
-                  onSelect={(icon) => {
-                    // If module, update module's symbol in global config (more complex)
-                    // For now, let's assume it's for styledText's text or directly injecting into module's symbol setting.
-                    // For module, a direct symbol field is better handled in ModuleConfig, so here we modify the text of styledText.
-                    if (segment.type === 'styledText') {
-                      handleSegmentChange(editingSegment, { text: icon });
-                      setActiveText(icon);
-                    } else if (segment.type === 'module') {
-                      // This would need to update currentTheme.config[segment.value].symbol
-                      // For now, just update the text of the displayed segment
-                      // A more robust solution would be to edit the module's actual symbol prop in theme-store
-                    }
-                    setShowIconBrowser(false);
-                  }}
+                  onSelect={handleIconSelect}
                 />
               </div>
             )}
@@ -310,19 +318,19 @@ export function FormatEditor({ formatString, onChange }: FormatEditorProps) {
 
       <div className="flex gap-2">
         <button
-          onClick={() => addSegment('text')}
+          onClick={handleAddText}
           className="flex flex-1 items-center justify-center gap-2 rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700"
         >
           <Text size={16} /> Add Text
         </button>
         <button
-          onClick={() => addSegment('module')}
+          onClick={handleAddModule}
           className="flex flex-1 items-center justify-center gap-2 rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700"
         >
           <LayoutGrid size={16} /> Add Module
         </button>
         <button
-          onClick={() => addSegment('styledText')}
+          onClick={handleAddStyledText}
           className="flex flex-1 items-center justify-center gap-2 rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700"
         >
           <PenTool size={16} /> Add Styled Text
