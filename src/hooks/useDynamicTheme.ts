@@ -39,9 +39,10 @@ export function useDynamicTheme() {
 
       // Only apply if the theme is different from current to avoid unnecessary re-renders
       if (currentTheme.metadata.id !== themeToApplyId) {
-        const targetTheme = [...savedThemes, ...PRESET_THEMES].find(
-          (theme) => theme.metadata.id === themeToApplyId,
-        );
+        const targetTheme =
+          savedThemes.find((theme) => theme.metadata.id === themeToApplyId) ||
+          PRESET_THEMES.find((theme) => theme.metadata.id === themeToApplyId);
+
         if (targetTheme) {
           loadTheme(targetTheme);
         }
