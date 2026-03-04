@@ -157,6 +157,10 @@ export function FormatEditor({ formatString, onChange }: FormatEditorProps) {
     setEditingSegment(null);
   };
 
+  const handleAddText = () => addSegment('text');
+  const handleAddModule = () => addSegment('module');
+  const handleAddStyledText = () => addSegment('styledText');
+
   const availableModules = MODULE_DEFINITIONS.map((m) => m.name);
 
   return (
@@ -202,19 +206,19 @@ export function FormatEditor({ formatString, onChange }: FormatEditorProps) {
 
       <div className="flex gap-2">
         <button
-          onClick={() => addSegment('text')}
+          onClick={handleAddText}
           className="flex flex-1 items-center justify-center gap-2 rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700"
         >
           <Text size={16} /> Add Text
         </button>
         <button
-          onClick={() => addSegment('module')}
+          onClick={handleAddModule}
           className="flex flex-1 items-center justify-center gap-2 rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700"
         >
           <LayoutGrid size={16} /> Add Module
         </button>
         <button
-          onClick={() => addSegment('styledText')}
+          onClick={handleAddStyledText}
           className="flex flex-1 items-center justify-center gap-2 rounded-md border border-gray-700 bg-gray-800 px-3 py-2 text-sm text-gray-300 hover:bg-gray-700"
         >
           <PenTool size={16} /> Add Styled Text

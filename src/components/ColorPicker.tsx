@@ -2,11 +2,18 @@ import { colord, extend } from 'colord';
 import a11yPlugin from 'colord/plugins/a11y';
 import namesPlugin from 'colord/plugins/names';
 import { AlertTriangle, Check, Pipette } from 'lucide-react';
-import React, { useEffect, useRef, useState } from 'react';
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 import { HexColorPicker } from 'react-colorful';
 
 import { ColorUtils } from '../lib/color-utils';
 import { cn } from '../lib/utils';
+import { useThemeStore } from '../stores/theme-store';
 
 extend([namesPlugin, a11yPlugin]);
 
@@ -31,9 +38,39 @@ const DEFAULT_SWATCHES = [
   '#C0C0C0',
 ];
 
-import { useMemo } from 'react';
+interface SwatchProps {
+  color: string;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
+  title: string;
+  ariaLabel: string;
+}
 
-import { useThemeStore } from '../stores/theme-store';
+const Swatch = React.memo(function Swatch({
+  color,
+  onClick,
+  title,
+  ariaLabel,
+}: SwatchProps) {
+  const ref = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.style.backgroundColor = color;
+    }
+  }, [color]);
+
+  return (
+    <button
+      type="button"
+      ref={ref}
+      data-color={color}
+      className="h-6 w-6 rounded-full border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 focus:ring-offset-gray-800"
+      onClick={onClick}
+      title={title}
+      aria-label={ariaLabel}
+    />
+  );
+});
 
 //...
 
@@ -46,6 +83,7 @@ export function ColorPicker({
   const [isOpen, setIsOpen] = useState(false);
   const [inputValue, setInputValue] = useState(color);
   const popoverRef = useRef<HTMLDivElement>(null);
+  const previewRef = useRef<HTMLButtonElement>(null);
 
   const { currentTheme } = useThemeStore();
 
@@ -76,10 +114,13 @@ export function ColorPicker({
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
-  const handleColorChange = (newColor: string) => {
-    setInputValue(newColor);
-    onChange(newColor);
-  };
+  const handleColorChange = useCallback(
+    (newColor: string) => {
+      setInputValue(newColor);
+      onChange(newColor);
+    },
+    [onChange],
+  );
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -88,6 +129,22 @@ export function ColorPicker({
       onChange(e.target.value);
     }
   };
+
+  const handlePresetClick = useCallback(
+    (e: React.MouseEvent<HTMLButtonElement>) => {
+      const presetColor = e.currentTarget.getAttribute('data-color');
+      if (presetColor) {
+        handleColorChange(presetColor);
+      }
+    },
+    [handleColorChange],
+  );
+
+  useEffect(() => {
+    if (previewRef.current) {
+      previewRef.current.style.backgroundColor = inputValue;
+    }
+  }, [inputValue]);
 
   // Contrast check against standard dark background
   const contrast = ColorUtils.checkContrast(inputValue, '#000000');
@@ -102,13 +159,16 @@ export function ColorPicker({
       )}
 
       <div className="flex gap-2">
-        <div
+        <button
+          type="button"
+          ref={previewRef}
           className="h-9 w-9 shrink-0 cursor-pointer rounded-md border border-gray-700 shadow-sm transition-transform active:scale-95"
-          style={{ backgroundColor: inputValue }}
           onClick={() => setIsOpen(!isOpen)}
+          aria-label={`Toggle color picker, current color is ${inputValue}`}
+          aria-expanded={isOpen}
         >
           {/* Checkerboard pattern for transparency if needed, mainly just color preview */}
-        </div>
+        </button>
 
         <div className="relative flex-1">
           <input
@@ -157,13 +217,12 @@ export function ColorPicker({
 
           <div className="grid grid-cols-5 gap-2">
             {displayColors.map((c) => (
-              <button
+              <Swatch
                 key={c}
-                className="h-6 w-6 rounded-full border border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-1 focus:ring-offset-gray-800"
-                style={{ backgroundColor: c }}
-                onClick={() => handleColorChange(c)}
+                color={c}
+                onClick={handlePresetClick}
                 title={c}
-                aria-label={`Select color ${c}`}
+                ariaLabel={`Select color ${c}`}
               />
             ))}
           </div>

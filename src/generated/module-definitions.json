@@ -198,11 +198,7 @@
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "buf.yaml",
-          "buf.gen.yaml",
-          "buf.work.yaml"
-        ]
+        "default": ["buf.yaml", "buf.gen.yaml", "buf.work.yaml"]
       },
       {
         "name": "detect_folders",
@@ -257,11 +253,7 @@
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "bun.lock",
-          "bun.lockb",
-          "bunfig.toml"
-        ]
+        "default": ["bun.lock", "bun.lockb", "bunfig.toml"]
       },
       {
         "name": "detect_folders",
@@ -310,10 +302,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "c",
-          "h"
-        ]
+        "default": ["c", "h"]
       },
       {
         "name": "detect_files",
@@ -332,18 +321,9 @@
         "description": "",
         "type": "array",
         "default": [
-          [
-            "cc",
-            "--version"
-          ],
-          [
-            "gcc",
-            "--version"
-          ],
-          [
-            "clang",
-            "--version"
-          ]
+          ["cc", "--version"],
+          ["gcc", "--version"],
+          ["clang", "--version"]
         ]
       }
     ]
@@ -448,10 +428,7 @@
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "CMakeLists.txt",
-          "CMakeCache.txt"
-        ]
+        "default": ["CMakeLists.txt", "CMakeCache.txt"]
       },
       {
         "name": "detect_folders",
@@ -511,10 +488,7 @@
       {
         "name": "notification_timeout",
         "description": "",
-        "type": [
-          "integer",
-          "null"
-        ]
+        "type": ["integer", "null"]
       }
     ]
   },
@@ -557,12 +531,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "cbl",
-          "cob",
-          "CBL",
-          "COB"
-        ]
+        "default": ["cbl", "cob", "CBL", "COB"]
       },
       {
         "name": "detect_files",
@@ -617,9 +586,7 @@
         "name": "detect_env_vars",
         "description": "",
         "type": "array",
-        "default": [
-          "!PIXI_ENVIRONMENT_NAME"
-        ]
+        "default": ["!PIXI_ENVIRONMENT_NAME"]
       },
       {
         "name": "disabled",
@@ -699,10 +666,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "c",
-          "h"
-        ]
+        "default": ["c", "h"]
       },
       {
         "name": "detect_files",
@@ -721,18 +685,9 @@
         "description": "",
         "type": "array",
         "default": [
-          [
-            "cc",
-            "--version"
-          ],
-          [
-            "gcc",
-            "--version"
-          ],
-          [
-            "clang",
-            "--version"
-          ]
+          ["cc", "--version"],
+          ["gcc", "--version"],
+          ["clang", "--version"]
         ]
       }
     ]
@@ -776,17 +731,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "cr"
-        ]
+        "default": ["cr"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "shard.yml"
-        ]
+        "default": ["shard.yml"]
       },
       {
         "name": "detect_folders",
@@ -841,9 +792,7 @@
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "daml.yaml"
-        ]
+        "default": ["daml.yaml"]
       },
       {
         "name": "detect_folders",
@@ -892,27 +841,19 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "dart"
-        ]
+        "default": ["dart"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "pubspec.yaml",
-          "pubspec.yml",
-          "pubspec.lock"
-        ]
+        "default": ["pubspec.yaml", "pubspec.yml", "pubspec.lock"]
       },
       {
         "name": "detect_folders",
         "description": "",
         "type": "array",
-        "default": [
-          ".dart_tool"
-        ]
+        "default": [".dart_tool"]
       }
     ]
   },
@@ -1035,19 +976,13 @@
       {
         "name": "repo_root_style",
         "description": "",
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "default": null
       },
       {
         "name": "before_repo_root_style",
         "description": "",
-        "type": [
-          "string",
-          "null"
-        ],
+        "type": ["string", "null"],
         "default": null
       },
       {
@@ -1127,17 +1062,13 @@
         "name": "detect_env_vars",
         "description": "",
         "type": "array",
-        "default": [
-          "DIRENV_FILE"
-        ]
+        "default": ["DIRENV_FILE"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          ".envrc"
-        ]
+        "default": [".envrc"]
       },
       {
         "name": "detect_folders",
@@ -1283,11 +1214,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "csproj",
-          "fsproj",
-          "xproj"
-        ]
+        "default": ["csproj", "fsproj", "xproj"]
       },
       {
         "name": "detect_files",
@@ -1354,9 +1281,7 @@
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "mix.exs"
-        ]
+        "default": ["mix.exs"]
       },
       {
         "name": "detect_folders",
@@ -1405,27 +1330,19 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "elm"
-        ]
+        "default": ["elm"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "elm.json",
-          "elm-package.json",
-          ".elm-version"
-        ]
+        "default": ["elm.json", "elm-package.json", ".elm-version"]
       },
       {
         "name": "detect_folders",
         "description": "",
         "type": "array",
-        "default": [
-          "elm-stuff"
-        ]
+        "default": ["elm-stuff"]
       }
     ]
   },
@@ -1474,10 +1391,7 @@
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "rebar.config",
-          "erlang.mk"
-        ]
+        "default": ["rebar.config", "erlang.mk"]
       },
       {
         "name": "detect_folders",
@@ -1526,9 +1440,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "fnl"
-        ]
+        "default": ["fnl"]
       },
       {
         "name": "detect_files",
@@ -1633,9 +1545,7 @@
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "fpm.toml"
-        ]
+        "default": ["fpm.toml"]
       },
       {
         "name": "detect_folders",
@@ -1648,18 +1558,9 @@
         "description": "",
         "type": "array",
         "default": [
-          [
-            "gfortran",
-            "--version"
-          ],
-          [
-            "flang",
-            "--version"
-          ],
-          [
-            "flang-new",
-            "--version"
-          ]
+          ["gfortran", "--version"],
+          ["flang", "--version"],
+          ["flang-new", "--version"]
         ]
       }
     ]
@@ -2135,10 +2036,7 @@
       {
         "name": "windows_starship",
         "description": "",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       }
     ]
   },
@@ -2181,17 +2079,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "gleam"
-        ]
+        "default": ["gleam"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "gleam.toml"
-        ]
+        "default": ["gleam.toml"]
       },
       {
         "name": "detect_folders",
@@ -2246,9 +2140,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "go"
-        ]
+        "default": ["go"]
       },
       {
         "name": "detect_files",
@@ -2268,9 +2160,7 @@
         "name": "detect_folders",
         "description": "",
         "type": "array",
-        "default": [
-          "Godeps"
-        ]
+        "default": ["Godeps"]
       }
     ]
   },
@@ -2319,10 +2209,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "gradle",
-          "gradle.kts"
-        ]
+        "default": ["gradle", "gradle.kts"]
       },
       {
         "name": "detect_files",
@@ -2334,9 +2221,7 @@
         "name": "detect_folders",
         "description": "",
         "type": "array",
-        "default": [
-          "gradle"
-        ]
+        "default": ["gradle"]
       }
     ]
   },
@@ -2410,20 +2295,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "hs",
-          "cabal",
-          "hs-boot"
-        ]
+        "default": ["hs", "cabal", "hs-boot"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "stack.yaml",
-          "cabal.project"
-        ]
+        "default": ["stack.yaml", "cabal.project"]
       },
       {
         "name": "detect_folders",
@@ -2472,29 +2350,19 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "hx",
-          "hxml"
-        ]
+        "default": ["hx", "hxml"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "haxelib.json",
-          "hxformat.json",
-          ".haxerc"
-        ]
+        "default": ["haxelib.json", "hxformat.json", ".haxerc"]
       },
       {
         "name": "detect_folders",
         "description": "",
         "type": "array",
-        "default": [
-          ".haxelib",
-          "haxe_libraries"
-        ]
+        "default": [".haxelib", "haxe_libraries"]
       }
     ]
   },
@@ -2543,10 +2411,7 @@
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "helmfile.yaml",
-          "Chart.yaml"
-        ]
+        "default": ["helmfile.yaml", "Chart.yaml"]
       },
       {
         "name": "detect_folders",
@@ -2766,14 +2631,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "java",
-          "class",
-          "jar",
-          "gradle",
-          "clj",
-          "cljc"
-        ]
+        "default": ["java", "class", "jar", "gradle", "clj", "cljc"]
       },
       {
         "name": "detect_files",
@@ -2886,18 +2744,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "jl"
-        ]
+        "default": ["jl"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "Project.toml",
-          "Manifest.toml"
-        ]
+        "default": ["Project.toml", "Manifest.toml"]
       },
       {
         "name": "detect_folders",
@@ -2952,10 +2805,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "kt",
-          "kts"
-        ]
+        "default": ["kt", "kts"]
       },
       {
         "name": "detect_files",
@@ -3133,25 +2983,19 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "lua"
-        ]
+        "default": ["lua"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          ".lua-version"
-        ]
+        "default": [".lua-version"]
       },
       {
         "name": "detect_folders",
         "description": "",
         "type": "array",
-        "default": [
-          "lua"
-        ]
+        "default": ["lua"]
       }
     ]
   },
@@ -3285,9 +3129,7 @@
         "name": "detect_folders",
         "description": "",
         "type": "array",
-        "default": [
-          ".mise"
-        ]
+        "default": [".mise"]
       },
       {
         "name": "healthy_symbol",
@@ -3336,10 +3178,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "mojo",
-          "🔥"
-        ]
+        "default": ["mojo", "🔥"]
       },
       {
         "name": "detect_files",
@@ -3456,19 +3295,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "nim",
-          "nims",
-          "nimble"
-        ]
+        "default": ["nim", "nims", "nimble"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "nim.cfg"
-        ]
+        "default": ["nim.cfg"]
       },
       {
         "name": "detect_folders",
@@ -3578,14 +3411,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "js",
-          "mjs",
-          "cjs",
-          "ts",
-          "mts",
-          "cts"
-        ]
+        "default": ["js", "mjs", "cjs", "ts", "mts", "cts"]
       },
       {
         "name": "detect_files",
@@ -3604,9 +3430,7 @@
         "name": "detect_folders",
         "description": "",
         "type": "array",
-        "default": [
-          "node_modules"
-        ]
+        "default": ["node_modules"]
       }
     ]
   },
@@ -3661,13 +3485,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "opam",
-          "ml",
-          "mli",
-          "re",
-          "rei"
-        ]
+        "default": ["opam", "ml", "mli", "re", "rei"]
       },
       {
         "name": "detect_files",
@@ -3685,10 +3503,7 @@
         "name": "detect_folders",
         "description": "",
         "type": "array",
-        "default": [
-          "_opam",
-          "esy.lock"
-        ]
+        "default": ["_opam", "esy.lock"]
       }
     ]
   },
@@ -3731,9 +3546,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "odin"
-        ]
+        "default": ["odin"]
       },
       {
         "name": "detect_files",
@@ -3788,9 +3601,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "rego"
-        ]
+        "default": ["rego"]
       },
       {
         "name": "detect_files",
@@ -4009,11 +3820,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "pl",
-          "pm",
-          "pod"
-        ]
+        "default": ["pl", "pm", "pod"]
       },
       {
         "name": "detect_files",
@@ -4076,18 +3883,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "php"
-        ]
+        "default": ["php"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "composer.json",
-          ".php-version"
-        ]
+        "default": ["composer.json", ".php-version"]
       },
       {
         "name": "detect_folders",
@@ -4148,9 +3950,7 @@
       {
         "name": "pixi_binary",
         "description": "",
-        "default": [
-          "pixi"
-        ]
+        "default": ["pixi"]
       },
       {
         "name": "show_default_environment",
@@ -4198,10 +3998,7 @@
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "pixi.toml",
-          "pixi.lock"
-        ]
+        "default": ["pixi.toml", "pixi.lock"]
       },
       {
         "name": "detect_folders",
@@ -4293,19 +4090,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "purs"
-        ]
+        "default": ["purs"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "spago.dhall",
-          "spago.yaml",
-          "spago.lock"
-        ]
+        "default": ["spago.dhall", "spago.yaml", "spago.lock"]
       },
       {
         "name": "detect_folders",
@@ -4335,17 +4126,7 @@
       {
         "name": "python_binary",
         "description": "",
-        "default": [
-          [
-            "python"
-          ],
-          [
-            "python3"
-          ],
-          [
-            "python2"
-          ]
-        ]
+        "default": [["python"], ["python3"], ["python2"]]
       },
       {
         "name": "format",
@@ -4381,10 +4162,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "py",
-          "ipynb"
-        ]
+        "default": ["py", "ipynb"]
       },
       {
         "name": "detect_files",
@@ -4410,9 +4188,7 @@
         "name": "detect_env_vars",
         "description": "",
         "type": "array",
-        "default": [
-          "VIRTUAL_ENV"
-        ]
+        "default": ["VIRTUAL_ENV"]
       }
     ]
   },
@@ -4455,17 +4231,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "qmd"
-        ]
+        "default": ["qmd"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "_quarto.yml"
-        ]
+        "default": ["_quarto.yml"]
       },
       {
         "name": "detect_folders",
@@ -4514,21 +4286,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "p6",
-          "pm6",
-          "pod6",
-          "raku",
-          "rakumod"
-        ]
+        "default": ["p6", "pm6", "pod6", "raku", "rakumod"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "META6.json"
-        ]
+        "default": ["META6.json"]
       },
       {
         "name": "detect_folders",
@@ -4577,10 +4341,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "red",
-          "reds"
-        ]
+        "default": ["red", "reds"]
       },
       {
         "name": "detect_files",
@@ -4635,29 +4396,19 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "R",
-          "Rd",
-          "Rmd",
-          "Rproj",
-          "Rsx"
-        ]
+        "default": ["R", "Rd", "Rmd", "Rproj", "Rsx"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "DESCRIPTION"
-        ]
+        "default": ["DESCRIPTION"]
       },
       {
         "name": "detect_folders",
         "description": "",
         "type": "array",
-        "default": [
-          ".Rproj.user"
-        ]
+        "default": [".Rproj.user"]
       }
     ]
   },
@@ -4700,18 +4451,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "rb"
-        ]
+        "default": ["rb"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "Gemfile",
-          ".ruby-version"
-        ]
+        "default": ["Gemfile", ".ruby-version"]
       },
       {
         "name": "detect_folders",
@@ -4723,10 +4469,7 @@
         "name": "detect_variables",
         "description": "",
         "type": "array",
-        "default": [
-          "RUBY_VERSION",
-          "RBENV_VERSION"
-        ]
+        "default": ["RUBY_VERSION", "RBENV_VERSION"]
       }
     ]
   },
@@ -4769,17 +4512,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "rs"
-        ]
+        "default": ["rs"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "Cargo.toml"
-        ]
+        "default": ["Cargo.toml"]
       },
       {
         "name": "detect_folders",
@@ -4828,28 +4567,19 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "sbt",
-          "scala"
-        ]
+        "default": ["sbt", "scala"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          ".scalaenv",
-          ".sbtenv",
-          "build.sbt"
-        ]
+        "default": [".scalaenv", ".sbtenv", "build.sbt"]
       },
       {
         "name": "detect_folders",
         "description": "",
         "type": "array",
-        "default": [
-          ".metals"
-        ]
+        "default": [".metals"]
       }
     ]
   },
@@ -4891,10 +4621,7 @@
       {
         "name": "pwsh_indicator",
         "description": "",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       {
         "name": "ion_indicator",
@@ -5070,17 +4797,13 @@
       {
         "name": "compiler",
         "description": "",
-        "default": [
-          "solc"
-        ]
+        "default": ["solc"]
       },
       {
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "sol"
-        ]
+        "default": ["sol"]
       },
       {
         "name": "detect_files",
@@ -5189,18 +4912,12 @@
       {
         "name": "success_style",
         "description": "",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       {
         "name": "failure_style",
         "description": "",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       {
         "name": "map_symbol",
@@ -5235,10 +4952,7 @@
       {
         "name": "pipestatus_segment_format",
         "description": "",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       {
         "name": "disabled",
@@ -5324,17 +5038,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "swift"
-        ]
+        "default": ["swift"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "Package.swift"
-        ]
+        "default": ["Package.swift"]
       },
       {
         "name": "detect_folders",
@@ -5383,11 +5093,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "tf",
-          "tfplan",
-          "tfstate"
-        ]
+        "default": ["tf", "tfplan", "tfstate"]
       },
       {
         "name": "detect_files",
@@ -5399,23 +5105,15 @@
         "name": "detect_folders",
         "description": "",
         "type": "array",
-        "default": [
-          ".terraform"
-        ]
+        "default": [".terraform"]
       },
       {
         "name": "commands",
         "description": "",
         "type": "array",
         "default": [
-          [
-            "terraform",
-            "version"
-          ],
-          [
-            "tofu",
-            "version"
-          ]
+          ["terraform", "version"],
+          ["tofu", "version"]
         ]
       }
     ]
@@ -5446,10 +5144,7 @@
       {
         "name": "time_format",
         "description": "",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       {
         "name": "disabled",
@@ -5527,10 +5222,7 @@
       {
         "name": "palette",
         "description": "",
-        "type": [
-          "string",
-          "null"
-        ]
+        "type": ["string", "null"]
       },
       {
         "name": "palettes",
@@ -5597,17 +5289,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "typ"
-        ]
+        "default": ["typ"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "template.typ"
-        ]
+        "default": ["template.typ"]
       },
       {
         "name": "detect_folders",
@@ -5711,9 +5399,7 @@
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "Vagrantfile"
-        ]
+        "default": ["Vagrantfile"]
       },
       {
         "name": "detect_folders",
@@ -5793,19 +5479,13 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "v"
-        ]
+        "default": ["v"]
       },
       {
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "v.mod",
-          "vpkg.json",
-          ".vpkg-lock.json"
-        ]
+        "default": ["v.mod", "vpkg.json", ".vpkg-lock.json"]
       },
       {
         "name": "detect_folders",
@@ -5860,9 +5540,7 @@
         "name": "detect_files",
         "description": "",
         "type": "array",
-        "default": [
-          "xmake.lua"
-        ]
+        "default": ["xmake.lua"]
       },
       {
         "name": "detect_folders",
@@ -5911,9 +5589,7 @@
         "name": "detect_extensions",
         "description": "",
         "type": "array",
-        "default": [
-          "zig"
-        ]
+        "default": ["zig"]
       },
       {
         "name": "detect_files",
