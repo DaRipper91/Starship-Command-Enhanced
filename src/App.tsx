@@ -3,8 +3,12 @@ import {
   ArrowLeftRight,
   Globe,
   Keyboard,
+  Menu,
+  Monitor,
   Redo,
+  Save,
   Settings,
+  Smartphone,
   Undo,
   X,
 } from 'lucide-react';
@@ -32,6 +36,7 @@ import { ConfirmationProvider } from './contexts/ConfirmationContext';
 import { ToastProvider, useToast } from './contexts/ToastContext';
 import { useDynamicTheme } from './hooks/useDynamicTheme';
 import { useKeyboardShortcuts } from './hooks/useKeyboardShortcuts';
+import { cn } from './lib/utils';
 import { useThemeStore } from './stores/theme-store';
 import { useUIStore } from './stores/ui-store';
 
@@ -42,9 +47,11 @@ function AppContent() {
     updateMetadata,
     saveTheme,
     resetTheme,
+    undo,
+    redo,
+    canUndo,
+    canRedo,
   } = useThemeStore();
-
-  const { undo, redo, canUndo, canRedo } = useThemeStore();
 
   const isUndoPossible = canUndo();
   const isRedoPossible = canRedo();
@@ -62,12 +69,38 @@ function AppContent() {
     setShowDynamicThemeSettings,
     showSolarSystem,
     setShowSolarSystem,
+    layoutMode,
+    setLayoutMode,
   } = useUIStore();
 
   const { addToast } = useToast();
   const [themeName, setThemeName] = useState(
     currentTheme.metadata.name || 'My Awesome Theme',
   );
+
+  // Derive effective layout mode
+  const isMobileLayout =
+    layoutMode === 'mobile' ||
+    (layoutMode === 'auto' && window.innerWidth <= 1024);
+  const isDesktopLayout =
+    layoutMode === 'desktop' ||
+    (layoutMode === 'auto' && window.innerWidth > 1024);
+
+  const [leftSidebarOpen, setLeftSidebarOpen] = useState(isDesktopLayout);
+  const [rightSidebarOpen, setRightSidebarOpen] = useState(
+    isDesktopLayout && window.innerWidth > 1280,
+  );
+
+  // Sync sidebars when layout mode changes
+  useEffect(() => {
+    if (layoutMode === 'desktop') {
+      setLeftSidebarOpen(true);
+      setRightSidebarOpen(window.innerWidth > 1280);
+    } else if (layoutMode === 'mobile') {
+      setLeftSidebarOpen(false);
+      setRightSidebarOpen(false);
+    }
+  }, [layoutMode]);
 
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showUploadModal, setShowUploadModal] = useState(false);
@@ -76,10 +109,8 @@ function AppContent() {
     username: string;
   } | null>(null);
 
-  // Activate dynamic theme switching
   useDynamicTheme();
 
-  // Sync local theme name state with store when loaded from somewhere else
   useEffect(() => {
     setThemeName(currentTheme.metadata.name || 'My Awesome Theme');
   }, [currentTheme.metadata.id, currentTheme.metadata.name]);
@@ -97,15 +128,14 @@ function AppContent() {
       );
       if (element) {
         const canvas = await html2canvas(element, {
-          scale: 0.8, // Lower scale for smaller image size
-          logging: false, // Disable logging
+          scale: 0.8,
+          logging: false,
           useCORS: true,
         });
-        const previewImage = canvas.toDataURL('image/jpeg', 0.5); // Low quality JPEG
+        const previewImage = canvas.toDataURL('image/jpeg', 0.5);
         saveTheme(previewImage);
         addToast('Theme saved successfully!', 'success');
       } else {
-        // Save without preview if element not found
         saveTheme();
         addToast('Theme saved (no preview).', 'info');
       }
@@ -125,21 +155,9 @@ function AppContent() {
   };
 
   useKeyboardShortcuts([
-    {
-      keys: 'mod+s',
-      description: 'Save current theme',
-      handler: () => handleSave(),
-    },
-    {
-      keys: 'mod+z',
-      description: 'Undo',
-      handler: () => undo(),
-    },
-    {
-      keys: 'mod+shift+z',
-      description: 'Redo',
-      handler: () => redo(),
-    },
+    { keys: 'mod+s', description: 'Save current theme', handler: handleSave },
+    { keys: 'mod+z', description: 'Undo', handler: undo },
+    { keys: 'mod+shift+z', description: 'Redo', handler: redo },
     {
       keys: 'mod+k',
       description: 'Open Command Palette',
@@ -200,140 +218,180 @@ function AppContent() {
         onClose={() => setShowCommandPalette(false)}
         actions={commandActions}
       />
+
       {/* HEADER */}
-      <header className="flex h-16 shrink-0 items-center justify-between border-b border-gray-800 bg-[#161b22] px-6 shadow-sm">
-        <div className="flex items-center gap-3">
-          <span className="text-xl">🚀</span>
-          <h1 className="text-lg font-bold text-gray-200">
-            Starship Theme Creator
-          </h1>
-        </div>
-        <div className="flex items-center gap-3">
+      <header className="flex h-auto min-h-[4rem] shrink-0 flex-col border-b border-gray-800 bg-[#161b22] px-4 py-2 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:px-6 sm:py-0">
+        <div className="flex items-center justify-between gap-3 sm:justify-start">
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setLeftSidebarOpen(!leftSidebarOpen)}
+              className={cn(
+                'rounded p-2 text-gray-400 hover:bg-gray-800',
+                !isMobileLayout && isDesktopLayout && 'lg:hidden',
+              )}
+            >
+              <Menu size={20} />
+            </button>
+            <span className="text-xl">🚀</span>
+            <h1 className="hidden text-lg font-bold text-gray-200 sm:block">
+              Starship
+            </h1>
+          </div>
+
           <input
             type="text"
             value={themeName}
             onChange={handleNameChange}
             placeholder="Theme Name"
-            className="rounded border border-gray-700 bg-[#0d1117] px-3 py-1.5 text-sm text-gray-300 focus:border-blue-500 focus:outline-none"
+            className="w-full max-w-[200px] rounded border border-gray-700 bg-[#0d1117] px-3 py-1.5 text-sm text-gray-300 focus:border-blue-500 focus:outline-none"
           />
-          <div className="flex items-center border-r border-gray-700 pr-3">
+
+          <div className="flex items-center gap-1 xl:hidden">
+            <button
+              onClick={() => setShowCommandPalette(true)}
+              className="rounded p-2 text-gray-400 hover:bg-gray-800"
+            >
+              <Keyboard size={18} />
+            </button>
+            <button
+              onClick={() => setRightSidebarOpen(!rightSidebarOpen)}
+              className={cn(
+                'rounded p-2 text-gray-400 hover:bg-gray-800',
+                isDesktopLayout && 'xl:hidden',
+              )}
+            >
+              <Settings size={20} />
+            </button>
+          </div>
+        </div>
+
+        <div className="mt-2 flex flex-wrap items-center justify-center gap-2 sm:mt-0 sm:justify-end">
+          {/* Layout Switcher */}
+          <div className="flex items-center rounded-lg bg-gray-800 p-1">
+            <button
+              onClick={() => setLayoutMode('mobile')}
+              className={cn(
+                'rounded px-2 py-1 transition-colors',
+                layoutMode === 'mobile'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-400 hover:text-gray-200',
+              )}
+              title="Mobile Mode"
+            >
+              <Smartphone size={16} />
+            </button>
+            <button
+              onClick={() => setLayoutMode('auto')}
+              className={cn(
+                'rounded px-2 py-1 text-[10px] font-bold transition-colors',
+                layoutMode === 'auto'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-400 hover:text-gray-200',
+              )}
+              title="Auto Layout"
+            >
+              AUTO
+            </button>
+            <button
+              onClick={() => setLayoutMode('desktop')}
+              className={cn(
+                'rounded px-2 py-1 transition-colors',
+                layoutMode === 'desktop'
+                  ? 'bg-blue-600 text-white'
+                  : 'text-gray-400 hover:text-gray-200',
+              )}
+              title="Desktop Mode"
+            >
+              <Monitor size={16} />
+            </button>
+          </div>
+
+          <div className="flex items-center gap-1 border-r border-gray-700 pr-2">
             <button
               onClick={undo}
               disabled={!isUndoPossible}
-              className="rounded p-2 text-gray-400 hover:bg-gray-800 hover:text-white disabled:bg-transparent disabled:opacity-30"
-              title="Undo (Cmd+Z)"
-              aria-label="Undo"
+              className="rounded p-1.5 text-gray-400 hover:bg-gray-800 disabled:opacity-30"
             >
-              <Undo size={18} />
+              <Undo size={16} />
             </button>
             <button
               onClick={redo}
               disabled={!isRedoPossible}
-              className="rounded p-2 text-gray-400 hover:bg-gray-800 hover:text-white disabled:bg-transparent disabled:opacity-30"
-              title="Redo (Cmd+Shift+Z)"
-              aria-label="Redo"
+              className="rounded p-1.5 text-gray-400 hover:bg-gray-800 disabled:opacity-30"
             >
-              <Redo size={18} />
+              <Redo size={16} />
             </button>
           </div>
+
           <button
-            onClick={handleNew}
-            className="rounded bg-gray-800 px-4 py-1.5 text-sm font-medium hover:bg-gray-700"
+            onClick={handleSave}
+            className="flex items-center gap-2 rounded bg-blue-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-blue-500"
           >
-            New
+            <Save size={14} className="xs:block hidden" /> Save
           </button>
+
           <button
             onClick={() => setShowGallery(true)}
-            className="rounded bg-gray-800 px-4 py-1.5 text-sm font-medium hover:bg-gray-700"
+            className="rounded bg-gray-800 px-3 py-1.5 text-xs font-medium hover:bg-gray-700"
           >
             Gallery
           </button>
-          <button
-            onClick={() => setShowSolarSystem(true)}
-            className="flex items-center gap-2 rounded bg-indigo-600 px-3 py-1.5 text-sm font-medium text-white hover:bg-indigo-500"
-          >
-            <Globe size={14} /> Community
-          </button>
-          <button
-            onClick={() => setShowComparison(true)}
-            className="flex items-center gap-2 rounded bg-gray-800 px-3 py-1.5 text-sm font-medium text-gray-300 hover:bg-gray-700"
-          >
-            <ArrowLeftRight size={14} /> Compare
-          </button>
-          <button
-            onClick={handleSave}
-            className="rounded bg-blue-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-blue-500"
-          >
-            Save
-          </button>
-          <button
-            onClick={() => {
-              if (currentUser) {
-                setShowUploadModal(true);
-              } else {
-                addToast('Please log in or register to share themes', 'info');
-                setShowAuthModal(true);
-              }
-            }}
-            className="rounded bg-indigo-600 px-4 py-1.5 text-sm font-medium text-white hover:bg-indigo-500"
-          >
-            Share
-          </button>
-          <button
-            onClick={() => setShowExportImport('import')}
-            className="rounded bg-gray-800 px-4 py-1.5 text-sm font-medium hover:bg-gray-700"
-          >
-            Import
-          </button>
-          <button
-            onClick={() => setShowExportImport('export')}
-            className="rounded bg-gray-800 px-4 py-1.5 text-sm font-medium hover:bg-gray-700"
-          >
-            Export
-          </button>
-          <button
-            onClick={() => setShowCommandPalette(true)}
-            className="ml-2 rounded-full p-2 text-gray-400 hover:bg-gray-800 hover:text-white"
-            title="Command Palette (Cmd+K)"
-            aria-label="Open Command Palette"
-          >
-            <Keyboard size={16} />
-          </button>
+
+          <div className="hidden gap-2 md:flex">
+            <button
+              onClick={() => setShowSolarSystem(true)}
+              className="flex items-center gap-2 rounded bg-indigo-600 px-3 py-1.5 text-sm font-medium hover:bg-indigo-500"
+            >
+              <Globe size={14} /> Community
+            </button>
+            <button
+              onClick={() => setShowComparison(true)}
+              className="flex items-center gap-2 rounded bg-gray-800 px-3 py-1.5 text-sm font-medium text-gray-300 hover:bg-gray-700"
+            >
+              <ArrowLeftRight size={14} /> Compare
+            </button>
+          </div>
+
           <button
             onClick={() => setShowDynamicThemeSettings(true)}
-            className="rounded-full p-2 text-gray-400 hover:bg-gray-800 hover:text-white"
-            title="Dynamic Theme Settings"
-            aria-label="Open Dynamic Theme Settings"
+            className="hidden rounded-full p-2 text-gray-400 hover:bg-gray-800 xl:block"
           >
-            <Settings size={16} />
+            <Settings size={18} />
           </button>
         </div>
       </header>
 
       {/* MAIN CONTENT */}
-      <div className="flex flex-1 overflow-hidden">
+      <div className="relative flex flex-1 overflow-hidden">
         {/* LEFT SIDEBAR */}
-        <aside className="flex w-80 shrink-0 flex-col overflow-y-auto border-r border-gray-800 bg-[#161b22]">
-          <div className="flex items-center justify-between border-b border-gray-800 p-4">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-400">
+        <aside
+          className={cn(
+            'absolute inset-y-0 left-0 z-40 w-72 shrink-0 flex-col overflow-y-auto border-r border-gray-800 bg-[#161b22] transition-transform duration-300',
+            isDesktopLayout
+              ? 'relative translate-x-0'
+              : leftSidebarOpen
+                ? 'translate-x-0'
+                : '-translate-x-full',
+          )}
+        >
+          <div className="p-4">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-gray-500">
               Modules
             </h2>
-            <div className="p-4">
-              <ErrorBoundary>
-                <ModuleList />
-              </ErrorBoundary>
-            </div>
+            <ErrorBoundary>
+              <ModuleList />
+            </ErrorBoundary>
           </div>
-          <div className="border-b border-gray-800 p-4">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-400">
+          <div className="border-t border-gray-800 p-4">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-gray-500">
               Colors
             </h2>
             <ErrorBoundary>
               <ImagePalette />
             </ErrorBoundary>
           </div>
-          <div className="border-b border-gray-800 p-4">
-            <h2 className="mb-4 text-sm font-semibold uppercase tracking-wider text-gray-400">
+          <div className="border-t border-gray-800 p-4">
+            <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-gray-500">
               Font
             </h2>
             <ErrorBoundary>
@@ -346,7 +404,7 @@ function AppContent() {
         </aside>
 
         {/* CENTER - TERMINAL */}
-        <main className="relative flex flex-1 flex-col overflow-y-auto p-8">
+        <main className="relative flex flex-1 flex-col overflow-y-auto bg-[#0d1117] p-4 sm:p-8">
           <div className="bg-grid-white/[0.02] pointer-events-none absolute inset-0 -z-10" />
           <div className="mx-auto flex w-full max-w-5xl flex-1 flex-col justify-center">
             <ErrorBoundary>
@@ -360,21 +418,48 @@ function AppContent() {
         </main>
 
         {/* RIGHT SIDEBAR */}
-        <aside className="flex w-80 shrink-0 flex-col overflow-y-auto border-l border-gray-800 bg-[#161b22] p-4">
-          {selectedModule ? (
-            <ModuleConfig />
-          ) : (
-            <div className="flex flex-1 flex-col items-center justify-center rounded border border-dashed border-gray-700 p-8 text-center text-sm text-gray-500">
-              <span className="mb-2 text-2xl">⚙️</span>
-              Select a module to configure
-            </div>
+        <aside
+          className={cn(
+            'absolute inset-y-0 right-0 z-40 w-80 shrink-0 flex-col overflow-y-auto border-l border-gray-800 bg-[#161b22] transition-transform duration-300',
+            isDesktopLayout && window.innerWidth > 1280
+              ? 'relative translate-x-0'
+              : rightSidebarOpen
+                ? 'translate-x-0'
+                : '-translate-x-full',
           )}
-          <SuggestionPanel />
-
-          <div className="mt-8 border-t border-gray-800 pt-4">
-            <GlobalFormatControls />
+        >
+          <div className="p-4">
+            <ErrorBoundary>
+              {selectedModule ? (
+                <ModuleConfig />
+              ) : (
+                <div className="flex flex-col items-center justify-center rounded border border-dashed border-gray-700 py-12 text-center text-sm text-gray-500">
+                  <span className="mb-2 text-2xl">⚙️</span>
+                  Select a module to configure
+                </div>
+              )}
+            </ErrorBoundary>
+            <div className="mt-6 border-t border-gray-800 pt-6">
+              <ErrorBoundary>
+                <GlobalFormatControls />
+              </ErrorBoundary>
+            </div>
+            <ErrorBoundary>
+              <SuggestionPanel />
+            </ErrorBoundary>
           </div>
         </aside>
+
+        {/* Overlay for mobile sidebars */}
+        {(leftSidebarOpen || rightSidebarOpen) && !isDesktopLayout && (
+          <div
+            className="absolute inset-0 z-30 bg-black/50"
+            onClick={() => {
+              setLeftSidebarOpen(false);
+              setRightSidebarOpen(false);
+            }}
+          />
+        )}
       </div>
 
       {/* MODALS */}

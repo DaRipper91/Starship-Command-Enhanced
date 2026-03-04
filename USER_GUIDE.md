@@ -5,12 +5,13 @@ Welcome to the **Starship Theme Creator**! This tool is designed to make creatin
 ## Table of Contents
 
 1. [Interface Overview](#interface-overview)
-2. [Managing Modules](#managing-modules)
-3. [Global Settings](#global-settings)
-4. [Color & Font Management](#color--font-management)
-5. [Importing and Exporting](#importing-and-exporting)
-6. [Theme Gallery](#theme-gallery)
-7. [Undo and Redo](#undo-and-redo)
+2. [Switching Layouts](#switching-layouts)
+3. [Managing Modules](#managing-modules)
+4. [Global Settings](#global-settings)
+5. [Color & Font Management](#color--font-management)
+6. [Importing and Exporting](#importing-and-exporting)
+7. [Theme Gallery](#theme-gallery)
+8. [Undo and Redo](#undo-and-redo)
 
 ---
 
@@ -19,14 +20,24 @@ Welcome to the **Starship Theme Creator**! This tool is designed to make creatin
 The interface is divided into three main sections:
 
 1.  **Left Sidebar (Library & Settings):**
-    - **Modules:** A list of available modules you can add to your prompt.
+    - **Modules:** A list of available modules you can add to your prompt. Includes a search bar for quick filtering.
     - **Colors (Image Palette):** Upload an image to automatically extract a matching color palette.
     - **Font:** Browse, preview, and download Nerd Fonts for your terminal.
 2.  **Center Console (Live Preview):**
     - This is an interactive `xterm.js` terminal. As you make changes to your theme, this preview updates in real-time, showing you exactly what your prompt will look like.
 3.  **Right Sidebar (Configuration):**
-    - **Module Config:** When you click a module in the Left Sidebar, its specific settings (symbols, colors, formatting) will appear here.
+    - **Module Config:** When you click a module in the Left Sidebar, its specific settings (symbols, colors, formatting) will appear here. Includes a **Live Preview** of just that module.
     - **Global Format Controls:** Configure the overall layout of your prompt (left format, right format, line breaks).
+
+## Switching Layouts
+
+In the top navigation bar, you will find a **Layout Switcher** with three modes:
+
+- **Mobile (Smartphone icon):** Collapses the sidebars into slide-out menus. Best for small screens, mobile browsers, or narrow windows.
+- **Desktop (Monitor icon):** Keeps both sidebars visible at all times. Best for large monitors.
+- **AUTO:** Automatically switches between Mobile and Desktop views based on your current window size.
+
+Your preference is saved automatically and will be remembered the next time you visit.
 
 ## Managing Modules
 
@@ -60,11 +71,13 @@ At the bottom of the Right Sidebar, you'll find the **Global Format Settings**.
 
 Under the **Colors** section in the Left Sidebar, you can provide an image URL. The built-in Python backend will analyze the image and generate a matching color palette. You can then easily apply these colors to different modules.
 
+### Integrated Glyph Support
+
+The app includes an integrated Nerd Font CDN. This means that all icons and symbols (like the Git branch icon or programming language logos) will render correctly in your browser even if you haven't installed any special fonts yet.
+
 ### Font Downloader
 
-A good prompt requires good fonts (specifically, Nerd Fonts for icons).
-
-- Under the **Font** section in the Left Sidebar, you can select from popular Nerd Fonts (like FiraCode, JetBrains Mono, Meslo).
+- Under the **Font** section in the Left Sidebar, you can select from popular Nerd Fonts.
 - The Live Preview will immediately update to show you how the font looks.
 - Click **Download & Install** to get the font file and view instructions on how to install it on your specific operating system (Windows, macOS, or Linux).
 

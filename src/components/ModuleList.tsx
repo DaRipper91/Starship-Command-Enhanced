@@ -17,7 +17,7 @@ import {
   verticalListSortingStrategy,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import { GripVertical } from 'lucide-react';
+import { GripVertical, Search, X } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import MODULE_DEFINITIONS from '../generated/module-definitions.json';
@@ -54,7 +54,7 @@ function SortableItem({
   const style = {
     transform: CSS.Transform.toString(transform),
     transition,
-    touchAction: 'none', // Recommended for dnd-kit
+    touchAction: 'none',
   };
 
   return (
@@ -122,10 +122,10 @@ function SortableItem({
 export function ModuleList({ className }: { className?: string }) {
   const { currentTheme, updateConfig, selectedModule, setSelectedModule } =
     useThemeStore();
-  const activeModules = useThemeStore(selectActiveModules);
+  const activeModulesStore = useThemeStore(selectActiveModules);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [searchTerm, setSearchTerm] = useState('');
 
-  // Combine predefined and custom modules for "allModules" needed for inactive calculation
   const allModules = useMemo(() => {
     const customModules: ModuleItem[] = Object.keys(
       currentTheme.config.custom || {},
@@ -143,23 +143,31 @@ export function ModuleList({ className }: { className?: string }) {
     return [...predefinedModules, ...customModules];
   }, [currentTheme.config.custom]);
 
-  // Find inactive modules
+  const filteredActiveModules = useMemo(() => {
+    if (!searchTerm) return activeModulesStore;
+    const term = searchTerm.toLowerCase();
+    return activeModulesStore.filter((m) =>
+      m.name.toLowerCase().includes(term),
+    );
+  }, [activeModulesStore, searchTerm]);
+
   const inactiveModules = useMemo(() => {
-    const activeNames = new Set(activeModules.map((m) => m.name));
-    return allModules.filter((def) => !activeNames.has(def.id));
-  }, [activeModules, allModules]);
+    const activeNames = new Set(activeModulesStore.map((m) => m.name));
+    const inactive = allModules.filter((def) => !activeNames.has(def.id));
+    if (!searchTerm) return inactive;
+    const term = searchTerm.toLowerCase();
+    return inactive.filter((m) => m.name.toLowerCase().includes(term));
+  }, [activeModulesStore, allModules, searchTerm]);
 
   const handleToggle = (name: string, enable: boolean) => {
     let newFormat = currentTheme.config.format || '';
     if (enable) {
       newFormat += `$${name}`;
     } else {
-      // Remove from format string
       const regex = new RegExp(`\\$${name}\\b`, 'g');
       newFormat = newFormat.replace(regex, '');
     }
 
-    // Also update module config to reflect disabled state
     const existingModuleConfig =
       (currentTheme.config[name] as BaseModuleConfig) || {};
 
@@ -185,11 +193,11 @@ export function ModuleList({ className }: { className?: string }) {
     setActiveId(null);
 
     if (over && active.id !== over.id) {
-      const oldIndex = activeModules.findIndex((m) => m.id === active.id);
-      const newIndex = activeModules.findIndex((m) => m.id === over.id);
+      const oldIndex = activeModulesStore.findIndex((m) => m.id === active.id);
+      const newIndex = activeModulesStore.findIndex((m) => m.id === over.id);
 
       if (oldIndex !== -1 && newIndex !== -1) {
-        const newModules = arrayMove(activeModules, oldIndex, newIndex);
+        const newModules = arrayMove(activeModulesStore, oldIndex, newIndex);
         const newFormat = newModules.map((m) => `$${m.name}`).join('');
         updateConfig({ format: newFormat });
       }
@@ -197,19 +205,41 @@ export function ModuleList({ className }: { className?: string }) {
   };
 
   const activeItem = useMemo(
-    () => activeModules.find((m) => m.id === activeId),
-    [activeId, activeModules],
+    () => activeModulesStore.find((m) => m.id === activeId),
+    [activeId, activeModulesStore],
   );
 
   return (
     <div className={cn('flex flex-col gap-6', className)}>
+      <div className="relative">
+        <Search
+          size={16}
+          className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500"
+        />
+        <input
+          type="text"
+          placeholder="Search modules..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="w-full rounded-md border border-gray-700 bg-gray-800/50 py-2 pl-10 pr-10 text-sm text-gray-100 placeholder-gray-500 transition-colors focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
+        />
+        {searchTerm && (
+          <button
+            onClick={() => setSearchTerm('')}
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-300"
+          >
+            <X size={16} />
+          </button>
+        )}
+      </div>
+
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
           <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-400">
             Active Modules
           </h2>
           <span className="text-xs text-gray-500">
-            {activeModules.length} enabled
+            {activeModulesStore.length} enabled
           </span>
         </div>
 
@@ -220,11 +250,11 @@ export function ModuleList({ className }: { className?: string }) {
           onDragEnd={handleDragEnd}
         >
           <SortableContext
-            items={activeModules.map((m) => m.id)}
+            items={filteredActiveModules.map((m) => m.id)}
             strategy={verticalListSortingStrategy}
           >
             <div className="flex flex-col gap-2">
-              {activeModules.map((module) => (
+              {filteredActiveModules.map((module) => (
                 <SortableItem
                   key={module.id}
                   item={module}
@@ -234,9 +264,11 @@ export function ModuleList({ className }: { className?: string }) {
                 />
               ))}
 
-              {activeModules.length === 0 && (
+              {filteredActiveModules.length === 0 && (
                 <div className="rounded-lg border border-dashed border-gray-700 py-8 text-center text-gray-500">
-                  No modules active
+                  {searchTerm
+                    ? 'No matching active modules'
+                    : 'No modules active'}
                 </div>
               )}
             </div>
@@ -257,14 +289,14 @@ export function ModuleList({ className }: { className?: string }) {
         </DndContext>
       </div>
 
-      {inactiveModules.length > 0 && (
+      {(inactiveModules.length > 0 || searchTerm) && (
         <div className="flex flex-col gap-3 border-t border-gray-800 pt-4">
           <div className="flex items-center justify-between">
             <h2 className="text-xs font-semibold uppercase tracking-wider text-gray-500">
               Disabled Modules
             </h2>
             <span className="text-xs text-gray-600">
-              {inactiveModules.length} disabled
+              {inactiveModules.length} found
             </span>
           </div>
 
@@ -280,8 +312,7 @@ export function ModuleList({ className }: { className?: string }) {
                     : 'border-gray-700 bg-gray-800/50 hover:border-gray-600',
                 )}
               >
-                <div className="w-[18px]" />{' '}
-                {/* Spacer for drag handle alignment */}
+                <div className="w-[18px]" />
                 <input
                   type="checkbox"
                   checked={false}
@@ -307,6 +338,12 @@ export function ModuleList({ className }: { className?: string }) {
                 </div>
               </div>
             ))}
+
+            {inactiveModules.length === 0 && searchTerm && (
+              <div className="py-4 text-center text-xs text-gray-500">
+                No matching disabled modules
+              </div>
+            )}
           </div>
         </div>
       )}

@@ -1,5 +1,7 @@
 import 'xterm/css/xterm.css';
 
+import html2canvas from 'html2canvas';
+import { Download } from 'lucide-react';
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Terminal } from 'xterm';
 import { FitAddon } from 'xterm-addon-fit';
@@ -54,6 +56,7 @@ export const TerminalPreview: React.FC<TerminalPreviewProps> = ({
   fontFamily,
   id,
 }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const terminalRef = useRef<HTMLDivElement>(null);
   const xtermRef = useRef<Terminal | null>(null);
   const fitAddonRef = useRef<FitAddon | null>(null);
@@ -63,6 +66,27 @@ export const TerminalPreview: React.FC<TerminalPreviewProps> = ({
   const [scenarioIndex, setScenarioIndex] = useState(0);
 
   const scenarioKeys = Object.keys(MOCK_SCENARIOS);
+
+  const handleDownload = async () => {
+    if (!containerRef.current) return;
+
+    try {
+      const canvas = await html2canvas(containerRef.current, {
+        backgroundColor: terminalBg,
+        scale: 2, // High resolution
+        useCORS: true,
+        logging: false,
+      });
+
+      const dataUrl = canvas.toDataURL('image/png');
+      const link = document.createElement('a');
+      link.download = `starship-theme-${currentTheme.metadata.name.toLowerCase().replace(/\s+/g, '-')}.png`;
+      link.href = dataUrl;
+      link.click();
+    } catch (error) {
+      console.error('Failed to capture terminal:', error);
+    }
+  };
 
   useEffect(() => {
     // Cycle through scenarios every 5 seconds
@@ -143,11 +167,42 @@ export const TerminalPreview: React.FC<TerminalPreviewProps> = ({
 
     // Write content
     term.reset();
+
+    // Write left prompt segments
     segments.forEach((segment) => {
       const ansi = styleToAnsi(segment.style, debouncedConfig);
       term.write(ansi + segment.text + (ansi ? '\x1b[0m' : ''));
     });
-  }, [segments, debouncedConfig]);
+
+    // Handle right_format
+    if (debouncedConfig.right_format) {
+      const currentScenarioKey = scenarioKeys[scenarioIndex];
+      const scenario = MOCK_SCENARIOS[currentScenarioKey];
+      const rightSegments = parseFormattedString(
+        debouncedConfig.right_format,
+        debouncedConfig,
+        scenario,
+      );
+
+      // Convert right segments to ANSI string to calculate visible length
+      let rightAnsi = '';
+      let rightVisibleText = '';
+      rightSegments.forEach((seg) => {
+        const ansi = styleToAnsi(seg.style, debouncedConfig);
+        rightAnsi += ansi + seg.text + (ansi ? '\x1b[0m' : '');
+        rightVisibleText += seg.text;
+      });
+
+      const rightLength = rightVisibleText.length;
+      const termWidth = term.cols;
+
+      if (rightLength > 0 && termWidth > rightLength) {
+        // Move cursor to the right position: termWidth - rightLength + 1
+        // \x1b[G moves to absolute column 1. \x1b[<n>G moves to absolute column n.
+        term.write(`\x1b[${termWidth - rightLength + 1}G${rightAnsi}`);
+      }
+    }
+  }, [segments, debouncedConfig, scenarioIndex, scenarioKeys]);
 
   const terminalBg = useMemo(() => {
     return translateThemeToXterm(debouncedConfig).background || '#1e1e1e';
@@ -155,6 +210,7 @@ export const TerminalPreview: React.FC<TerminalPreviewProps> = ({
 
   return (
     <div
+      ref={containerRef}
       id={id}
       className={cn(
         'flex flex-col overflow-hidden rounded-lg border border-gray-700 shadow-2xl',
@@ -163,12 +219,21 @@ export const TerminalPreview: React.FC<TerminalPreviewProps> = ({
       style={{ backgroundColor: terminalBg }}
     >
       <div className="flex shrink-0 items-center gap-2 border-b border-gray-700 bg-gray-800/50 px-4 py-2">
-        <div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
-        <div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
-        <div className="h-3 w-3 rounded-full bg-[#27c93f]" />
-        <div className="ml-4 select-none text-xs font-medium text-gray-400">
+        <div className="flex gap-2">
+          <div className="h-3 w-3 rounded-full bg-[#ff5f56]" />
+          <div className="h-3 w-3 rounded-full bg-[#ffbd2e]" />
+          <div className="h-3 w-3 rounded-full bg-[#27c93f]" />
+        </div>
+        <div className="ml-4 flex-1 select-none text-xs font-medium text-gray-400">
           Terminal Preview ({MOCK_SCENARIOS[scenarioKeys[scenarioIndex]].name})
         </div>
+        <button
+          onClick={handleDownload}
+          title="Download as PNG"
+          className="rounded p-1 text-gray-400 transition-colors hover:bg-gray-700 hover:text-white"
+        >
+          <Download size={16} />
+        </button>
       </div>
 
       <div className="relative min-h-[200px] flex-1 p-1">

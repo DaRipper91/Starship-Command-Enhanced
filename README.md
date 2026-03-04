@@ -7,6 +7,8 @@ A powerful, visual, no-code drag-and-drop editor for creating beautiful [Starshi
 ## ✨ Features
 
 - **Live Terminal Preview:** See your prompt update in real-time as you make changes. Powered by `xterm.js`, it renders your configuration exactly as your terminal would.
+- **Adaptive Layout Modes:** Switch between **Mobile**, **Desktop**, or **Auto** modes to optimize for any screen size—perfect for power users on Android/Termux!
+- **Enhanced Glyph Support:** Integrated Nerd Font CDN ensures all symbols and icons render perfectly without local font installation.
 - **Drag-and-Drop Modules:** Easily reorder, enable, and disable Starship modules with an intuitive graphical interface. No more fighting with TOML syntax errors.
 - **Intelligent Color Extraction:** Upload a background image or wallpaper, and our built-in Python backend will automatically extract a beautiful, matching color palette for your prompt.
 - **Integrated Font Management:** Preview how your prompt looks with various popular Nerd Fonts. Download fonts directly from the app with guided installation instructions for your OS.
@@ -86,8 +88,10 @@ _(Note: The Vite development server is configured to proxy API requests to `http
 
 ## 📚 Documentation
 
+- [**Master Manual**](project_docs/master-manual.md) - The complete reference guide for installation, usage, and development.
 - [**User Guide**](USER_GUIDE.md) - Detailed instructions on how to use all features of the editor.
 - [**Developer Guide**](DEVELOPER_GUIDE.md) - Architecture overview and contribution guidelines.
+- [**Quick Reference**](project_docs/quick-reference.md) - Fast lookup for shortcuts and syntax.
 - [**Changelog**](CHANGELOG.md) - Version history and updates.
 
 ## 🤝 Contributing

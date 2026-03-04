@@ -18,14 +18,23 @@ export function useKeyboardShortcuts(shortcuts: Shortcut[]) {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      // Don't trigger shortcuts inside inputs/textareas unless specifically handled
-      if (
-        ['INPUT', 'TEXTAREA', 'SELECT'].includes(
-          (e.target as HTMLElement).tagName,
-        ) &&
-        !e.metaKey &&
-        !e.ctrlKey // Allow Cmd/Ctrl combinations
-      ) {
+      const target = e.target as HTMLElement;
+      const isEditable =
+        ['INPUT', 'TEXTAREA', 'SELECT'].includes(target.tagName) ||
+        target.isContentEditable;
+
+      const keys = e.key.toLowerCase();
+      const isUndoRedo =
+        (e.metaKey || e.ctrlKey) && (keys === 'z' || keys === 'y');
+
+      // If we are in an editable element, let the browser handle basic text editing keys
+      // and undo/redo natively.
+      if (isEditable && isUndoRedo) {
+        return;
+      }
+
+      // Existing general guard
+      if (isEditable && !e.metaKey && !e.ctrlKey) {
         return;
       }
 

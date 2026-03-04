@@ -2,10 +2,14 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 
 export type View = 'welcome' | 'preview' | 'colors' | 'modules' | 'editor';
+export type LayoutMode = 'auto' | 'mobile' | 'desktop';
 
 interface UIStore {
   activeView: View;
   setActiveView: (view: View) => void;
+
+  layoutMode: LayoutMode;
+  setLayoutMode: (mode: LayoutMode) => void;
 
   showExportImport: 'export' | 'import' | null;
   setShowExportImport: (state: 'export' | 'import' | null) => void;
@@ -35,6 +39,9 @@ export const useUIStore = create<UIStore>()(
       activeView: 'welcome',
       setActiveView: (view) => set({ activeView: view }),
 
+      layoutMode: 'auto',
+      setLayoutMode: (mode) => set({ layoutMode: mode }),
+
       showExportImport: null,
       setShowExportImport: (state) => set({ showExportImport: state }),
 
@@ -59,7 +66,10 @@ export const useUIStore = create<UIStore>()(
     }),
     {
       name: 'starship-ui-storage',
-      partialize: (state) => ({ activeView: state.activeView }), // Only persist activeView
+      partialize: (state) => ({
+        activeView: state.activeView,
+        layoutMode: state.layoutMode,
+      }),
     },
   ),
 );
