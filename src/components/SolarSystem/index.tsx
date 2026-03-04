@@ -3,6 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 import { useConfirmation } from '../../contexts/ConfirmationContext';
 import { useToast } from '../../contexts/ToastContext';
+import { fetchJson } from '../../lib/api';
 import { useThemeStore } from '../../stores/theme-store';
 import { Theme } from '../../types/starship.types';
 
@@ -41,11 +42,11 @@ export function SolarSystem({ onClose }: SolarSystemProps) {
 
   const fetchCategories = async () => {
     try {
-      const response = await fetch('/api/categories');
-      if (!response.ok) {
-        throw new Error('Failed to fetch categories.');
-      }
-      const data = await response.json();
+      const data = await fetchJson<string[]>(
+        '/api/categories',
+        {},
+        'Failed to fetch categories.',
+      );
       setCategories(data);
     } catch (err) {
       console.error('Error fetching categories:', err);
@@ -63,11 +64,11 @@ export function SolarSystem({ onClose }: SolarSystemProps) {
       }
       // No direct search endpoint for now, client-side filter for simplicity
 
-      const response = await fetch(`/api/themes?${params.toString()}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch themes.');
-      }
-      let data: CommunityTheme[] = await response.json();
+      let data = await fetchJson<CommunityTheme[]>(
+        `/api/themes?${params.toString()}`,
+        {},
+        'Failed to fetch themes.',
+      );
 
       if (searchTerm) {
         data = data.filter(

@@ -2,6 +2,7 @@ import { X } from 'lucide-react';
 import React, { useState } from 'react';
 
 import { useToast } from '../contexts/ToastContext';
+import { fetchJson } from '../lib/api';
 
 interface AuthModalProps {
   onClose: () => void;
@@ -26,19 +27,14 @@ export function AuthModal({ onClose, onLoginSuccess }: AuthModalProps) {
       : { username, email, password };
 
     try {
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const data = await fetchJson<{ user_id: number }>(
+        endpoint,
+        {
+          method: 'POST',
+          body: JSON.stringify(payload),
         },
-        body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Authentication failed');
-      }
+        'Authentication failed',
+      );
 
       if (isLogin) {
         addToast('Logged in successfully', 'success');
