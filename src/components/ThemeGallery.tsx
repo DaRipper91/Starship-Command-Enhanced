@@ -2,6 +2,7 @@ import { Clock, Play, Trash2 } from 'lucide-react';
 
 import { useConfirmation } from '../contexts/ConfirmationContext';
 import { useToast } from '../contexts/ToastContext';
+import { logger } from '../lib/logger';
 import { PRESET_THEMES } from '../lib/presets';
 import { cn } from '../lib/utils';
 import { useThemeStore } from '../stores/theme-store';
@@ -58,7 +59,7 @@ export function ThemeGallery({ className, onSelect }: ThemeGalleryProps) {
       if (onSelect) onSelect();
       addToast('Theme loaded successfully!', 'success');
     } catch (error) {
-      console.error('Failed to load theme:', error);
+      logger.error('Failed to load theme:', error);
       addToast('Failed to load theme.', 'error');
     }
   };
