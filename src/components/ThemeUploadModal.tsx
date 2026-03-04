@@ -2,6 +2,7 @@ import { X } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
 import { useToast } from '../contexts/ToastContext';
+import { fetchJson } from '../lib/api';
 import { useThemeStore } from '../stores/theme-store';
 
 interface ThemeUploadModalProps {
@@ -24,12 +25,9 @@ export function ThemeUploadModal({ onClose, userId }: ThemeUploadModalProps) {
   useEffect(() => {
     const fetchCategories = async () => {
       try {
-        const response = await fetch('/api/categories');
-        if (response.ok) {
-          const data = await response.json();
-          setCategories(data);
-          if (data.length > 0) setCategory(data[0]);
-        }
+        const data = await fetchJson<string[]>('/api/categories');
+        setCategories(data);
+        if (data.length > 0) setCategory(data[0]);
       } catch (err) {
         console.error('Failed to load categories', err);
       }
@@ -52,19 +50,10 @@ export function ThemeUploadModal({ onClose, userId }: ThemeUploadModalProps) {
         preview_image: currentTheme.metadata.previewImage || null,
       };
 
-      const response = await fetch('/api/themes', {
+      await fetchJson('/api/themes', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
         body: JSON.stringify(payload),
-      });
-
-      const data = await response.json();
-
-      if (!response.ok) {
-        throw new Error(data.error || 'Failed to upload theme');
-      }
+      }, 'Failed to upload theme');
 
       addToast('Theme uploaded successfully to Community Gallery!', 'success');
       onClose();
