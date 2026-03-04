@@ -7,7 +7,7 @@ import { TerminalPreview } from '../TerminalPreview';
 vi.mock('xterm', () => {
   return {
     Terminal: class {
-      options: any = {};
+      options: Record<string, unknown> = {};
       loadAddon() {}
       open() {}
       dispose() {}
@@ -32,7 +32,9 @@ class MockResizeObserver {
   disconnect() {}
 }
 
-(globalThis as any).ResizeObserver = MockResizeObserver;
+(
+  globalThis as unknown as { ResizeObserver: typeof MockResizeObserver }
+).ResizeObserver = MockResizeObserver;
 
 describe('TerminalPreview', () => {
   it('renders correctly', () => {

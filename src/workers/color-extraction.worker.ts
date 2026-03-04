@@ -15,9 +15,12 @@ self.onmessage = async (e) => {
     const extractedPalette: Record<string, string> = {};
     if (palette.Vibrant) extractedPalette.primary = palette.Vibrant.hex;
     if (palette.Muted) extractedPalette.secondary = palette.Muted.hex;
-    if (palette.LightVibrant) extractedPalette.accent = palette.LightVibrant.hex;
-    if (palette.DarkVibrant) extractedPalette.background = palette.DarkVibrant.hex;
-    if (palette.LightMuted) extractedPalette.foreground = palette.LightMuted.hex;
+    if (palette.LightVibrant)
+      extractedPalette.accent = palette.LightVibrant.hex;
+    if (palette.DarkVibrant)
+      extractedPalette.background = palette.DarkVibrant.hex;
+    if (palette.LightMuted)
+      extractedPalette.foreground = palette.LightMuted.hex;
 
     // Fill missing fields with defaults or derived colors
     extractedPalette.success = extractedPalette.primary;
@@ -26,6 +29,9 @@ self.onmessage = async (e) => {
 
     self.postMessage({ type: 'success', payload: extractedPalette });
   } catch (error) {
-    self.postMessage({ type: 'error', error: error instanceof Error ? error.message : 'Unknown error' });
+    self.postMessage({
+      type: 'error',
+      error: error instanceof Error ? error.message : 'Unknown error',
+    });
   }
 };
