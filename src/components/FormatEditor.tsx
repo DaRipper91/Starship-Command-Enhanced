@@ -168,6 +168,23 @@ export function FormatEditor({ formatString, onChange }: FormatEditorProps) {
     if (editingSegment === null) return null;
     const segment = segments[editingSegment];
 
+    const handleIconSelect = (icon: string) => {
+      setShowIconBrowser(false);
+
+      // If module, update module's symbol in global config (more complex)
+      // For now, let's assume it's for styledText's text or directly injecting into module's symbol setting.
+      // For module, a direct symbol field is better handled in ModuleConfig, so here we modify the text of styledText.
+      if (segment.type !== 'styledText') {
+        // This would need to update currentTheme.config[segment.value].symbol
+        // For now, just update the text of the displayed segment
+        // A more robust solution would be to edit the module's actual symbol prop in theme-store
+        return;
+      }
+
+      handleSegmentChange(editingSegment, { text: icon });
+      setActiveText(icon);
+    };
+
     return (
       <div className="mt-4 flex flex-col gap-3 rounded-lg border border-gray-700 bg-gray-800 p-4 shadow-inner">
         <h4 className="text-sm font-semibold capitalize text-gray-200">
@@ -241,20 +258,7 @@ export function FormatEditor({ formatString, onChange }: FormatEditorProps) {
                           ?.symbol || ''
                       : (segment as StyledTextSegment).text
                   }
-                  onSelect={(icon) => {
-                    // If module, update module's symbol in global config (more complex)
-                    // For now, let's assume it's for styledText's text or directly injecting into module's symbol setting.
-                    // For module, a direct symbol field is better handled in ModuleConfig, so here we modify the text of styledText.
-                    if (segment.type === 'styledText') {
-                      handleSegmentChange(editingSegment, { text: icon });
-                      setActiveText(icon);
-                    } else if (segment.type === 'module') {
-                      // This would need to update currentTheme.config[segment.value].symbol
-                      // For now, just update the text of the displayed segment
-                      // A more robust solution would be to edit the module's actual symbol prop in theme-store
-                    }
-                    setShowIconBrowser(false);
-                  }}
+                  onSelect={handleIconSelect}
                 />
               </div>
             )}
