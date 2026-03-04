@@ -5,28 +5,27 @@ import MODULE_DEFINITIONS from '../generated/module-definitions.json';
 import { cn } from '../lib/utils';
 import { useThemeStore } from '../stores/theme-store';
 import { BaseModuleConfig } from '../types/starship.types';
-import { IconBrowser } from './IconBrowser';
-import { StyleEditor } from './StyleEditor'; // Reusing StyleEditor for segment styling
+import { FormatSegmentEditor } from './FormatSegmentEditor';
 
 // Define types for format segments
-interface TextSegment {
+export interface TextSegment {
   type: 'text';
   value: string;
 }
 
-interface ModuleSegment {
+export interface ModuleSegment {
   type: 'module';
   value: string; // e.g., 'directory', 'git_branch'
   style?: string;
 }
 
-interface StyledTextSegment {
+export interface StyledTextSegment {
   type: 'styledText';
   text: string;
   style: string;
 }
 
-type FormatSegment = TextSegment | ModuleSegment | StyledTextSegment;
+export type FormatSegment = TextSegment | ModuleSegment | StyledTextSegment;
 
 interface FormatEditorProps {
   formatString: string;
@@ -164,117 +163,6 @@ export function FormatEditor({ formatString, onChange }: FormatEditorProps) {
 
   const availableModules = MODULE_DEFINITIONS.map((m) => m.name);
 
-  const renderSegmentEditor = () => {
-    if (editingSegment === null) return null;
-    const segment = segments[editingSegment];
-
-    const handleIconSelect = (icon: string) => {
-      setShowIconBrowser(false);
-
-      // If module, update module's symbol in global config (more complex)
-      // For now, let's assume it's for styledText's text or directly injecting into module's symbol setting.
-      // For module, a direct symbol field is better handled in ModuleConfig, so here we modify the text of styledText.
-      if (segment.type !== 'styledText') {
-        // This would need to update currentTheme.config[segment.value].symbol
-        // For now, just update the text of the displayed segment
-        // A more robust solution would be to edit the module's actual symbol prop in theme-store
-        return;
-      }
-
-      handleSegmentChange(editingSegment, { text: icon });
-      setActiveText(icon);
-    };
-
-    return (
-      <div className="mt-4 flex flex-col gap-3 rounded-lg border border-gray-700 bg-gray-800 p-4 shadow-inner">
-        <h4 className="text-sm font-semibold capitalize text-gray-200">
-          Edit {segment.type.replace('Text', ' Text')} Segment
-        </h4>
-
-        {/* Text/Value Input */}
-        {(segment.type === 'text' || segment.type === 'styledText') && (
-          <input
-            type="text"
-            value={activeText}
-            onChange={(e) => {
-              setActiveText(e.target.value);
-              handleSegmentChange(editingSegment, { value: e.target.value });
-              if (segment.type === 'styledText')
-                handleSegmentChange(editingSegment, { text: e.target.value });
-            }}
-            className="w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-gray-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-            placeholder="Segment text"
-          />
-        )}
-
-        {segment.type === 'module' && (
-          <select
-            value={segment.value}
-            onChange={(e) =>
-              handleSegmentChange(editingSegment, { value: e.target.value })
-            }
-            className="w-full rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-sm text-gray-100 focus:border-blue-500 focus:outline-none focus:ring-1 focus:ring-blue-500"
-          >
-            {availableModules.map((modId) => (
-              <option key={modId} value={modId}>
-                {modId.replace(/_/g, ' ')}
-              </option>
-            ))}
-          </select>
-        )}
-
-        {/* Style Input (for modules and styledText) */}
-        {(segment.type === 'styledText' || segment.type === 'module') && (
-          <div className="flex flex-col gap-2">
-            <label className="text-xs font-medium text-gray-400">Style</label>
-            <StyleEditor
-              value={activeStyle}
-              onChange={(newStyle) => {
-                setActiveStyle(newStyle);
-                handleSegmentChange(editingSegment, { style: newStyle });
-              }}
-            />
-          </div>
-        )}
-
-        {/* Icon Browser Integration (for symbols in modules or styled text) */}
-        {(segment.type === 'module' || segment.type === 'styledText') && (
-          <div className="relative flex flex-col gap-2" ref={editorRef}>
-            <label className="text-xs font-medium text-gray-400">
-              Symbol (via Icon Browser)
-            </label>
-            <button
-              onClick={() => setShowIconBrowser(!showIconBrowser)}
-              className="rounded-md border border-gray-700 bg-gray-900 px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700"
-            >
-              Browse Icons
-            </button>
-            {showIconBrowser && (
-              <div className="absolute left-0 top-full z-50 mt-1 w-full sm:w-[300px]">
-                <IconBrowser
-                  currentSymbol={
-                    segment.type === 'module'
-                      ? (currentTheme.config[segment.value] as BaseModuleConfig)
-                          ?.symbol || ''
-                      : (segment as StyledTextSegment).text
-                  }
-                  onSelect={handleIconSelect}
-                />
-              </div>
-            )}
-          </div>
-        )}
-
-        <button
-          onClick={() => removeSegment(editingSegment)}
-          className="mt-2 self-end rounded bg-red-600 px-3 py-1.5 text-sm text-white hover:bg-red-500"
-        >
-          Remove Segment
-        </button>
-      </div>
-    );
-  };
-
   return (
     <div className="flex flex-col gap-3">
       <div
@@ -337,7 +225,22 @@ export function FormatEditor({ formatString, onChange }: FormatEditorProps) {
         </button>
       </div>
 
-      {renderSegmentEditor()}
+      {editingSegment !== null && (
+        <FormatSegmentEditor
+          segment={segments[editingSegment]}
+          activeText={activeText}
+          setActiveText={setActiveText}
+          activeStyle={activeStyle}
+          setActiveStyle={setActiveStyle}
+          showIconBrowser={showIconBrowser}
+          setShowIconBrowser={setShowIconBrowser}
+          onSegmentChange={(newProps) =>
+            handleSegmentChange(editingSegment, newProps)
+          }
+          onRemove={() => removeSegment(editingSegment)}
+          availableModules={availableModules}
+        />
+      )}
     </div>
   );
 }
