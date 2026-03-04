@@ -52,13 +52,16 @@ export function ThemeUploadModal({ onClose, userId }: ThemeUploadModalProps) {
         preview_image: currentTheme.metadata.previewImage || null,
       };
 
-      const response = await fetch('/api/themes', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
+      const response = await fetch(
+        '/api/themes',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(payload),
         },
-        body: JSON.stringify(payload),
-      });
+      );
 
       const data = await response.json();
 
