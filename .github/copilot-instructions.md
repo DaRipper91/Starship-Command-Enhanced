@@ -35,6 +35,7 @@ User action → useUIStore (modal flags)     → modal shown/hidden
 ### Layout
 
 `App.tsx` renders a fixed 3-column layout:
+
 - **Left sidebar** — `ModuleList` (drag-and-drop reorder), `ImagePalette` (color extraction), `FontSelector`
 - **Center** — `TerminalPreview` (live xterm.js preview, captured as JPEG for theme thumbnails)
 - **Right sidebar** — `ModuleConfig` (per-module settings for `selectedModule`), `SuggestionPanel`, `GlobalFormatControls`
@@ -58,6 +59,7 @@ Modals (Gallery, Export/Import, Comparison, CommandPalette, SolarSystem, Auth, U
 ### State mutations
 
 Always use store actions — never mutate state directly:
+
 ```ts
 updateConfig({ directory: newConfig });   // ✅
 state.currentTheme.config.directory = …; // ❌
