@@ -238,27 +238,22 @@ export const useThemeStore = create<ThemeStore>()(
       },
 
       importToml: (tomlString) => {
-        try {
-          const config = TomlParser.parse(tomlString);
-          set((state) => ({
-            past: [...state.past, deepClone(state.currentTheme)].slice(
-              -HISTORY_LIMIT,
-            ),
-            currentTheme: {
-              ...state.currentTheme,
-              config,
-              metadata: {
-                ...state.currentTheme.metadata,
-                updated: new Date(),
-              },
+        const config = TomlParser.parse(tomlString);
+        set((state) => ({
+          past: [...state.past, deepClone(state.currentTheme)].slice(
+            -HISTORY_LIMIT,
+          ),
+          currentTheme: {
+            ...state.currentTheme,
+            config,
+            metadata: {
+              ...state.currentTheme.metadata,
+              updated: new Date(),
             },
-            selectedModule: null,
-            future: [],
-          }));
-        } catch (error) {
-          console.error('Failed to import TOML:', error);
-          throw error;
-        }
+          },
+          selectedModule: null,
+          future: [],
+        }));
       },
 
       updateDynamicSettings: (settings) => {

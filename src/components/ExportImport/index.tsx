@@ -87,6 +87,10 @@ export function ExportImport({
       addToast('Theme imported successfully!', 'success');
       onClose();
     } catch (err) {
+      addToast(
+        'Failed to import theme configuration. Please check the TOML syntax.',
+        'error',
+      );
       setValidationError(
         `Failed to import: ${err instanceof Error ? err.message : String(err)}`,
       );
