@@ -16,7 +16,7 @@ describe('fetchJson', () => {
     };
     global.fetch = vi.fn().mockResolvedValue(mockResponse);
 
-    const result = await fetchJson('/test-url');
+    const result = await fetchJson('/test-url', { body: JSON.stringify(mockData), method: 'POST' });
 
     expect(result).toEqual(mockData);
     expect(global.fetch).toHaveBeenCalledWith(
@@ -29,6 +29,20 @@ describe('fetchJson', () => {
     expect(callHeaders.get('Content-Type')).toBe('application/json');
   });
 
+  it('should not set Content-Type if no body is provided (GET request)', async () => {
+    const mockResponse = {
+      ok: true,
+      headers: new Headers({ 'content-type': 'application/json' }),
+      json: async () => ({}),
+    };
+    global.fetch = vi.fn().mockResolvedValue(mockResponse);
+
+    await fetchJson('/test-url');
+
+    const callHeaders = (global.fetch as any).mock.calls[0][1].headers as Headers;
+    expect(callHeaders.get('Content-Type')).toBeNull();
+  });
+
   it('should merge custom headers', async () => {
     const mockResponse = {
       ok: true,
@@ -38,6 +52,8 @@ describe('fetchJson', () => {
     global.fetch = vi.fn().mockResolvedValue(mockResponse);
 
     await fetchJson('/test-url', {
+      method: 'POST',
+      body: JSON.stringify({}),
       headers: { 'X-Custom-Header': 'value' },
     });
 
@@ -62,6 +78,17 @@ describe('fetchJson', () => {
     global.fetch = vi.fn().mockResolvedValue(mockResponse);
 
     await expect(fetchJson('/test-url')).rejects.toThrow('Server error message');
+  });
+
+  it('should throw error if JSON response is expected but not received (even if ok)', async () => {
+    const mockResponse = {
+      ok: true,
+      headers: new Headers({ 'content-type': 'text/plain' }),
+      text: async () => 'Not JSON',
+    };
+    global.fetch = vi.fn().mockResolvedValue(mockResponse);
+
+    await expect(fetchJson('/test-url')).rejects.toThrow('Expected JSON response but received text/plain');
   });
 
   it('should throw default error message on failure without error in JSON', async () => {

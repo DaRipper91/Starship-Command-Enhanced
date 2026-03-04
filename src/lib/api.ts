@@ -8,7 +8,9 @@ export async function fetchJson<T>(
   defaultErrorMessage = 'Request failed',
 ): Promise<T> {
   const headers = new Headers(options.headers);
-  if (!headers.has('Content-Type')) {
+
+  // Only set Content-Type: application/json if there's a body and it's not already set
+  if (options.body && !headers.has('Content-Type')) {
     headers.set('Content-Type', 'application/json');
   }
 
@@ -17,14 +19,14 @@ export async function fetchJson<T>(
     headers,
   });
 
-  let data: any;
   const contentType = response.headers.get('content-type');
+  const isJson = contentType && contentType.includes('application/json');
 
-  if (contentType && contentType.includes('application/json')) {
+  let data: any;
+  if (isJson) {
     try {
       data = await response.json();
     } catch (err) {
-      // If JSON parsing fails even though header says it's JSON
       if (!response.ok) {
         throw new Error(defaultErrorMessage);
       }
@@ -35,6 +37,10 @@ export async function fetchJson<T>(
   if (!response.ok) {
     const errorMsg = data?.error || data?.message || defaultErrorMessage;
     throw new Error(errorMsg);
+  }
+
+  if (!isJson) {
+    throw new Error('Expected JSON response but received ' + (contentType || 'none'));
   }
 
   return data as T;
