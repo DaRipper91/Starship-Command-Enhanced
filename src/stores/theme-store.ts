@@ -72,7 +72,30 @@ const deepClone = <T>(obj: T): T => {
   if (typeof structuredClone === 'function') {
     return structuredClone(obj);
   }
-  return JSON.parse(JSON.stringify(obj));
+
+  if (obj === null || typeof obj !== 'object') {
+    return obj;
+  }
+
+  if (obj instanceof Date) {
+    return new Date(obj.getTime()) as any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  }
+
+  if (Array.isArray(obj)) {
+    const arrCopy = new Array(obj.length);
+    for (let i = 0; i < obj.length; i++) {
+      arrCopy[i] = deepClone(obj[i]);
+    }
+    return arrCopy as any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  }
+
+  const objCopy = {} as any; // eslint-disable-line @typescript-eslint/no-explicit-any
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      objCopy[key] = deepClone((obj as any)[key]); // eslint-disable-line @typescript-eslint/no-explicit-any
+    }
+  }
+  return objCopy;
 };
 
 export const useThemeStore = create<ThemeStore>()(
