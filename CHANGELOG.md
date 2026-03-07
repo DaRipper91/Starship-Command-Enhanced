@@ -1,6 +1,27 @@
 # Changelog
 
-## [1.4.0] - 2026-03-03
+## [1.5.1] - 2026-03-04
+
+### Tests
+
+- **translateThemeToXterm coverage:** Added `src/lib/theme-to-xterm.test.ts` with 5 edge-case tests — empty config, missing named palette, custom palette, global palette fallback, and invalid color fallback (CP-12).
+
+## [1.5.0] - 2026-03-04
+
+### Security
+
+- **CORS Hardening:** Replaced open `CORS(app)` with an allowlist from the `ALLOWED_ORIGINS` environment variable (defaults to `localhost:5173/5001` for local dev safety). Eliminates cross-origin requests from arbitrary origins in production.
+
+### Performance
+
+- **useDynamicTheme Optimization:** Replaced `[...savedThemes, ...PRESET_THEMES].find()` with two sequential `.find()` calls. Eliminates unnecessary array allocation inside the `setInterval` that runs every minute.
+
+### Changed
+
+- **Fetch Error Handling:** Extracted duplicated `fetch`/JSON/error-handling boilerplate from `AuthModal`, `SolarSystem`, and `ThemeUploadModal` into a shared `src/lib/api.ts` helper (`fetchJson<T>`). Reduces surface area for HTTP error bugs.
+- **CI Pipeline:** Added `.github/workflows/ci.yml` for automated lint + test runs on every push and pull request.
+- **Claude Workflows:** Both `claude.yml` and `claude-code-review.yml` now support either `ANTHROPIC_API_KEY` or `CLAUDE_CODE_OAUTH_TOKEN`, removing the hard dependency on OAuth.
+- **Copilot Instructions:** Updated `.github/copilot-instructions.md` with Vitest globals note, `selectActiveModules` export, `src/components/ui/` primitives, and TypeScript compiler strictness details.
 
 ### Audited and Verified
 
