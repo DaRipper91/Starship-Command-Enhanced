@@ -10,19 +10,25 @@ This skill transforms Gemini CLI into a technical writer and documentation archi
 ## Core Workflows
 
 ### 1. Documenting New Features
+
 When a new feature is added (e.g., a new component or hook):
+
 - **Extract**: Analyze the source code for JSDoc comments, TypeScript interfaces, and props.
 - **Synthesize**: Create a "How it Works" section for the `DEVELOPER_GUIDE.md`.
 - **Tutorialize**: Create a "Using [Feature]" section for the `USER_GUIDE.md`.
 
 ### 2. Updating Architecture Guides
+
 When core logic changes (e.g., state management refactors):
+
 - **Trace**: Identify all affected documentation (README, Developer Guide, Master Manual).
 - **Update**: Surgically replace outdated sections while maintaining the surrounding context.
 - **Validate**: Ensure all internal links and references are still valid.
 
 ### 3. Extracting Documentation from Source
+
 Use this workflow to generate technical references automatically:
+
 - **Parse**: Use `grep_search` to find `interface`, `type`, and `export const/function` with JSDoc.
 - **Format**: Convert extracted types into Markdown tables.
 

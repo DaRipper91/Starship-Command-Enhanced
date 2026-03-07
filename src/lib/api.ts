@@ -22,7 +22,7 @@ export async function fetchJson<T>(
   const contentType = response.headers.get('content-type');
   const isJson = contentType && contentType.includes('application/json');
 
-  let data: any;
+  let data: any; // eslint-disable-line @typescript-eslint/no-explicit-any
   if (isJson) {
     try {
       data = await response.json();
@@ -40,7 +40,9 @@ export async function fetchJson<T>(
   }
 
   if (!isJson) {
-    throw new Error('Expected JSON response but received ' + (contentType || 'none'));
+    throw new Error(
+      'Expected JSON response but received ' + (contentType || 'none'),
+    );
   }
 
   return data as T;
