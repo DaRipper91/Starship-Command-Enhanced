@@ -3,6 +3,7 @@ import React from 'react';
 
 import { PRESET_THEMES } from '../lib/presets';
 import { useThemeStore } from '../stores/theme-store';
+import { ThemeSelector } from './ui/ThemeSelector';
 
 interface DynamicThemeSettingsModalProps {
   onClose: () => void;
@@ -75,23 +76,13 @@ export function DynamicThemeSettingsModal({
           <div
             className={`flex flex-col gap-4 ${!dynamicSettings.enabled ? 'pointer-events-none opacity-50' : ''}`}
           >
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-gray-300">
-                Day Theme
-              </label>
-              <select
-                name="dayThemeId"
-                value={dynamicSettings.dayThemeId}
-                onChange={handleChange}
-                className="w-full rounded border border-gray-700 bg-[#0d1117] px-3 py-2 text-sm text-gray-300 focus:border-blue-500 focus:outline-none"
-              >
-                {allThemes.map((theme) => (
-                  <option key={theme.metadata.id} value={theme.metadata.id}>
-                    {theme.metadata.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <ThemeSelector
+              label="Day Theme"
+              name="dayThemeId"
+              value={dynamicSettings.dayThemeId}
+              onChange={handleChange}
+              themes={allThemes}
+            />
 
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium text-gray-300">
@@ -108,23 +99,13 @@ export function DynamicThemeSettingsModal({
 
             <div className="my-2 h-px bg-gray-800" />
 
-            <div className="flex flex-col gap-2">
-              <label className="text-sm font-medium text-gray-300">
-                Night Theme
-              </label>
-              <select
-                name="nightThemeId"
-                value={dynamicSettings.nightThemeId}
-                onChange={handleChange}
-                className="w-full rounded border border-gray-700 bg-[#0d1117] px-3 py-2 text-sm text-gray-300 focus:border-blue-500 focus:outline-none"
-              >
-                {allThemes.map((theme) => (
-                  <option key={theme.metadata.id} value={theme.metadata.id}>
-                    {theme.metadata.name}
-                  </option>
-                ))}
-              </select>
-            </div>
+            <ThemeSelector
+              label="Night Theme"
+              name="nightThemeId"
+              value={dynamicSettings.nightThemeId}
+              onChange={handleChange}
+              themes={allThemes}
+            />
 
             <div className="flex flex-col gap-2">
               <label className="text-sm font-medium text-gray-300">
