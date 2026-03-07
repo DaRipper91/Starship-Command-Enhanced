@@ -19,7 +19,7 @@ You are an expert full-stack developer and Android systems integrator. This proj
 ### 2. Backend Migration (JS-Only)
 - **Goal**: Zero external dependencies (No Flask, No Python).
 - **Tooling**: Use `canvas` APIs or libraries like `colorthief` (JS version) for palette extraction.
-- **Workflow**: 
+- **Workflow**:
     - Identify current logic in `server/color_extractor.py`.
     - Implement equivalent logic in `src/lib/color-extraction.service.ts`.
     - Deprecate and remove the `server/` directory.
@@ -29,7 +29,7 @@ You are an expert full-stack developer and Android systems integrator. This proj
 - **Permissions**: Request `READ_EXTERNAL_STORAGE` and `WRITE_EXTERNAL_STORAGE`.
 - **Storage Target**: `/storage/emulated/0/Download/StarshipThemes/` (Standard public access).
 - **Termux Linkage**:
-    - Provide users with a clear bash command to run in Termux: 
+    - Provide users with a clear bash command to run in Termux:
       `ln -sf /sdcard/Download/StarshipThemes/starship.toml ~/.config/starship.toml`
     - Ensure the UI clearly explains the "One-time setup" vs "Daily sync" workflows.
 
