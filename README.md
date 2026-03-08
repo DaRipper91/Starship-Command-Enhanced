@@ -30,8 +30,8 @@ The easiest way to run the Starship Theme Creator is to build the standalone exe
 1.  **Clone the repository:**
 
     ```bash
-    git clone https://github.com/DaRipper91/Starship-Command.git
-    cd Starship-Command
+    git clone https://github.com/DaRipper91/Starship-Command-Enhanced.git
+    cd Starship-Command-Enhanced
     ```
 
 2.  **Run the Build Script:**
