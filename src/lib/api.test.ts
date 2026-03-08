@@ -16,16 +16,20 @@ describe('fetchJson', () => {
     };
     global.fetch = vi.fn().mockResolvedValue(mockResponse);
 
-    const result = await fetchJson('/test-url', { body: JSON.stringify(mockData), method: 'POST' });
+    const result = await fetchJson('/test-url', {
+      body: JSON.stringify(mockData),
+      method: 'POST',
+    });
 
     expect(result).toEqual(mockData);
     expect(global.fetch).toHaveBeenCalledWith(
       '/test-url',
       expect.objectContaining({
         headers: expect.any(Headers),
-      })
+      }),
     );
-    const callHeaders = (global.fetch as any).mock.calls[0][1].headers as Headers;
+    const callHeaders = (global.fetch as ReturnType<typeof vi.fn>).mock
+      .calls[0][1].headers as Headers;
     expect(callHeaders.get('Content-Type')).toBe('application/json');
   });
 
@@ -39,7 +43,8 @@ describe('fetchJson', () => {
 
     await fetchJson('/test-url');
 
-    const callHeaders = (global.fetch as any).mock.calls[0][1].headers as Headers;
+    const callHeaders = (global.fetch as ReturnType<typeof vi.fn>).mock
+      .calls[0][1].headers as Headers;
     expect(callHeaders.get('Content-Type')).toBeNull();
   });
 
@@ -61,9 +66,10 @@ describe('fetchJson', () => {
       '/test-url',
       expect.objectContaining({
         headers: expect.any(Headers),
-      })
+      }),
     );
-    const callHeaders = (global.fetch as any).mock.calls[0][1].headers as Headers;
+    const callHeaders = (global.fetch as ReturnType<typeof vi.fn>).mock
+      .calls[0][1].headers as Headers;
     expect(callHeaders.get('Content-Type')).toBe('application/json');
     expect(callHeaders.get('X-Custom-Header')).toBe('value');
   });
@@ -77,7 +83,9 @@ describe('fetchJson', () => {
     };
     global.fetch = vi.fn().mockResolvedValue(mockResponse);
 
-    await expect(fetchJson('/test-url')).rejects.toThrow('Server error message');
+    await expect(fetchJson('/test-url')).rejects.toThrow(
+      'Server error message',
+    );
   });
 
   it('should throw error if JSON response is expected but not received (even if ok)', async () => {
@@ -88,7 +96,9 @@ describe('fetchJson', () => {
     };
     global.fetch = vi.fn().mockResolvedValue(mockResponse);
 
-    await expect(fetchJson('/test-url')).rejects.toThrow('Expected JSON response but received text/plain');
+    await expect(fetchJson('/test-url')).rejects.toThrow(
+      'Expected JSON response but received text/plain',
+    );
   });
 
   it('should throw default error message on failure without error in JSON', async () => {
@@ -100,7 +110,7 @@ describe('fetchJson', () => {
     global.fetch = vi.fn().mockResolvedValue(mockResponse);
 
     await expect(fetchJson('/test-url', {}, 'Default error')).rejects.toThrow(
-      'Default error'
+      'Default error',
     );
   });
 
@@ -113,7 +123,7 @@ describe('fetchJson', () => {
     global.fetch = vi.fn().mockResolvedValue(mockResponse);
 
     await expect(fetchJson('/test-url', {}, 'Default error')).rejects.toThrow(
-      'Default error'
+      'Default error',
     );
   });
 

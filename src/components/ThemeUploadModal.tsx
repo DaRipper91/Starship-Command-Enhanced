@@ -50,10 +50,14 @@ export function ThemeUploadModal({ onClose, userId }: ThemeUploadModalProps) {
         preview_image: currentTheme.metadata.previewImage || null,
       };
 
-      await fetchJson('/api/themes', {
-        method: 'POST',
-        body: JSON.stringify(payload),
-      }, 'Failed to upload theme');
+      await fetchJson(
+        '/api/themes',
+        {
+          method: 'POST',
+          body: JSON.stringify(payload),
+        },
+        'Failed to upload theme',
+      );
 
       addToast('Theme uploaded successfully to Community Gallery!', 'success');
       onClose();
